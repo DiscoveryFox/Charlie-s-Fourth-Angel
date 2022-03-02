@@ -1,52 +1,61 @@
-<p align="center"><img src="\favicon.png" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/DiscoveryFox/Charlie-s-Fourth-Angel/master/favicon.png" /></p>
 
 <h1 align="center"> Charlie's Fourth Angel </h1>
 
-<p align="center"> Intro - Boilerplate for Readme.md on Github </p>
+<p align="center"> Like Hacking for Dummies | But Better </p>
 
 <hr/>
 
-<p> Describe you project -> I hate to always "reinvent" README.md on GitHub that is why I decided to make this Starter README.md template. Also I prefer HTML syntax because I use HTML every day and it has some extra features like center the elements. </p>
+<p>A website that allows the user to use many common hacking scripts, normally only executable in the terminal, based on
+a simple GUI. The GUI is designed that it's understandable for everybody. There are 2 different Mode's.
+<br>
+</p>
+
+<table>
+    <tr>
+        <td style="width: 300px; text-align: left">Simple Mode </td>
+        <td style="width: 300px">This is the simple mode. Every Person should be able to use the Website in this mode. 
+        And the best Thing is that you don't even lose any functionality. It's just maybe a little faster for more 
+        experienced people to use the Advanced Mode</td>
+    </tr>
+    <tr>
+        <td style="width: 300px">Advanced Mode</td>
+        <td style="width: 300px">This is the Advanced Mode. The interface may look very complicated at the first look, 
+        but with a little training and know-how, this interface can also be mastered very quickly and efficient.</td>
+    </tr>
+    
+
+</table>
 
 <h3> List of features </h3>
 
 <ul>
-  <li>Beautiful Starter Template for README.md</li>
-  <li>Key feature num. 2</li>
-  <li>Key feature num. 3</li>
-  <li>Key feature num. 4</li>
+  <li>4 Different DDOS/DOS Attack Tools</li> 
+  <li>2 Browser Camera Attack Scripts</li>
+  <li>6 Different Keylogger</li>
+  <li>3 Wlan Attacks</li>
 </ul>
 
-<h3> Demo -> Show me what you got </h3>
+[//]: # (todo I still need to implement these Features they are not completed. Also need to count them)
 
-<a href="#"> Link to your awesome Demo </a>
-
-<a href="#"> Another Link to your awesome Demo </a>
-
-<a href="https://www.designinspiration.info/"> Design Fonts Inspiration </a>
-
-<h3> Code Demo </h3>
-
-```html
-
-We will use markdown for the Syntax Highlighting
-
-<ul>
-  <li>Beautiful Starter Template for README.md</li>
-  <li>Key feature num. 2</li>
-  <li>Key feature num. 3</li>
-  <li>Key feature num. 4</li>
-</ul>
-
-```
 
 <h3> Download & Installation </h3>
 
 ```shell
-$ npm i boilerplate-readme-template
+$ git clone https://github.com/DiscoveryFox/Charlie-s-Fourth-Angel
+$ python setup.py build
 ```
-<h3>Contributing</h3>
-Keep it simple. Keep it minimal. Don't put every single feature just because you can.
+To get started simply execute the **start.py** script.
+
+```shell
+$ python start.py
+```
+
+If you wanna start the Website with integrated ngrok service just run it with `-n True`
+
+````shell
+$ python start.py -n True
+````
 
 <h3>Authors or Acknowledgments</h3>
 <ul>
@@ -55,4 +64,7 @@ Keep it simple. Keep it minimal. Don't put every single feature just because you
 
 <h3>License</h3>
 
-This project is licensed under the MIT License
+This project is licensed under the GNU GENERAL PUBLIC LICENSE
+<br>
+<br>
+<a href="flinn.eu/Charlie-s-Fourth-Angel">Project Website </a>
