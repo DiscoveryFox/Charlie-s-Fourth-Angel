@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="42266078-7041-4fd3-a267-d4cb128ed381" name="kali">
+        <fileTransfer accessType="SFTP" host="192.168.178.56" port="22" sshConfigId="86b0402c-ab3b-4522-a65e-841d6ca92185" sshConfig="Kali Raspberry Pi@home">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

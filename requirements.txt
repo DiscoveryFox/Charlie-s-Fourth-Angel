@@ -1,0 +1,4 @@
+Flask~=2.0.3
+psutil~=5.9.0
+pyngrok~=5.1.0
+rich~=11.2.0
