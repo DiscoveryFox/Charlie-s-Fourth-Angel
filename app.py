@@ -62,5 +62,15 @@ def update(id):
         return render_template('update.html', task=task)
 
 
+
+@app.route('/CamPhish/')
+def camphish_create() -> str:
+    print(request.method)
+    service = request.args.get('port_forwarding')
+    template = request.args.get('template')
+    ngrok_url = "test"
+    return render_template('Camphish.html', ngrok_url=ngrok_url)
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0')

