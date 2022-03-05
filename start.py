@@ -10,7 +10,7 @@
 from subprocess import Popen
 import psutil
 import atexit
-from pyngrok import ngrok
+
 import argparse
 from rich.console import Console
 from rich.panel import Panel
@@ -29,6 +29,7 @@ parser.add_argument(
 args = parser.parse_args( )
 
 if args.__dict__.get('n').lower() == 'true':
+    from pyngrok import ngrok
     http_tunnel = ngrok.connect(addr=5000)
     console = Console()
     console.print((Panel(f'[cyan]NGROK URL: {http_tunnel.public_url} ', title='[cyan]Charlie\'s Fourth Angel')))

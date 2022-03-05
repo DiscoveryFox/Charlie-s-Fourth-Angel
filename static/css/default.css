@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css?family=Dosis:400,700&display=swap");
+
+body {
+    font-family: 'Dosis', sans-serif;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.navbar,
+.navbar-light {
+    height: 60px;
+    background-color: #dbdbdb;
+}
+
+/* Dark Mode */
+
+[theme="dark"] {
+    background-color: #121212;
+    color: #fff;
+}
+
+[theme="dark"] .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: brightness(180);
+}
+
+[theme="dark"] .navbar,
+[theme="dark"] .navbar-light {
+    height: 60px;
+    background-color: #202020;
+}
+
+[theme="dark"] .container {
+    margin-right: 200px;
+    width: 200px;
+}

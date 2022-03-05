@@ -10,6 +10,10 @@
     </content>
     <orderEntry type="jdk" jdkName="Python 3.10 (Charlie-s-Fourth-Angel)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="jquery" level="application" />
+    <orderEntry type="library" name="popper.js" level="application" />
+    <orderEntry type="library" name="bootstrap" level="application" />
+    <orderEntry type="library" name="jquery-3.4.1.slim" level="application" />
   </component>
   <component name="PackageRequirementsSettings">
     <option name="removeUnused" value="true" />

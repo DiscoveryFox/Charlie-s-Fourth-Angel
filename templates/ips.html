@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8'">
+    <meta http-equiv="refresh" content="5">
+    <title>IP'S</title>
+    {% if ips|length > 0 %}
+        <style>
+            body {
+                border:1px solid black;
+            }
+        </style>
+
+    {% else %}
+        <style>
+            body {
+                border: none;
+            }
+
+        </style>
+    {% endif %}
+</head>
+<body>
+    {%  for i in ips%}
+        <h5>{{ i }} just clicked the Link</h5>
+    {% endfor %}
+
+</body>
+</html>
