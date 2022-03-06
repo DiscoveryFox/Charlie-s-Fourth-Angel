@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/DiscoveryFox/Charlie-s-Fourth-Angel/master/favicon.png" 
+<p align="center"><img src="https://raw.githubusercontent.com/DiscoveryFox/Charlie-s-Fourth-Angel/master/favicon_dark.png" 
 title="Charle's Fourth Angel Logo"/></p>
 
 <h1 align="center"> Charlie's Fourth Angel </h1>
