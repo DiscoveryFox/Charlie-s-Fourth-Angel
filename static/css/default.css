@@ -13,6 +13,11 @@ body {
 
 .navbar,
 .navbar-light {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     height: 60px;
     background-color: #dbdbdb;
 }
@@ -33,6 +38,11 @@ body {
 
 [theme="dark"] .navbar,
 [theme="dark"] .navbar-light {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     height: 60px;
     background-color: #202020;
 }
