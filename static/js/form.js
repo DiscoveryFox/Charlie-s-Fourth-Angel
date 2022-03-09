@@ -10,6 +10,8 @@ $(document).ready(function () {
             url: '/get_link'
         })
             .done(function (data) {
+                var prettydata;
+                prettydata.concat('<a href="', data.toString(), '">Link: ', data.toString(), '</a>')
                 $('#ngrok_url').text(data).show();
                 $('#stop_camphish').toggle();
             });

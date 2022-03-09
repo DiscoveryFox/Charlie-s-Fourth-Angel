@@ -23,7 +23,9 @@ class Output:
 
 
 class custom_thread(threading.Thread):
-    def __init__(self, target, args, daemon):
+    def __init__(self, target, args=None, daemon=False):
+        if args is None:
+            args = []
         super( ).__init__(target=target, args=args, daemon=daemon)
         self._is_running = True
 
