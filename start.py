@@ -32,7 +32,7 @@ if args.__dict__.get('n').lower() == 'true':
     from pyngrok import ngrok
     http_tunnel = ngrok.connect(addr=5000)
     console = Console()
-    console.print((Panel(f'[cyan]NGROK URL: {http_tunnel.public_url} ', title='[cyan]Charlie\'s Fourth Angel')))
+    console.print((Panel(f'[cyan]NGROK URL: [bold]{http_tunnel.public_url} ', title='[cyan]Charlie\'s Fourth Angel')))
 elif args.__dict__.get('n').lower() != "false" and args.__dict__.get('n').lower() != "true":
     parser.error(f'-n must be True or False. You set it to: {args.__dict__.get("n")}')
     parser.print_help( )
