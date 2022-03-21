@@ -53,72 +53,6 @@ def camphish(service: int, template: int, autthoken: str) -> str:
     :return: ngrok_link
     """
 
-    class TextIOTrap:
-        name = None
-        buffer = None
-        encoding = None
-        errors = None
-        newlines = None
-        line_buffering = None
-
-        def __init__(self, **args):
-            self.write_handler = args.get('write_handler', None)
-            self.name = args.get('name', '-')
-
-        def __iter__(self):
-            return []
-
-        def close(self):
-            pass
-
-        def detach(self):
-            pass
-
-        def fileno(self):
-            return 0
-
-        def flush(self):
-            pass
-
-        def isatty(self):
-            return False
-
-        def read(self, n=None):
-            return ''
-
-        def readable(self):
-            return False
-
-        def readline(self, limit=-1):
-            pass
-
-        def readlines(self, hint=-1):
-            return []
-
-        def seek(self, offset, whence=0):
-            pass
-
-        def seekable(self):
-            return False
-
-        def tell(self):
-            return 0
-
-        def truncate(self, size=None):
-            pass
-
-        def writable(self):
-            return True
-
-        def write(self, s):
-            if self.write_handler and not s == '\n':
-                self.write_handler(s)
-            return 0
-
-        def writelines(self, lines):
-            if isinstance(lines, list):
-                for s in lines: self.write(s)
-
     config = configparser.ConfigParser( )
     config.read('app.cfg')
     if platform.system( ) == 'Linux':
@@ -153,3 +87,69 @@ def camphish(service: int, template: int, autthoken: str) -> str:
         print('MacOS(DARWIN) DETECTED')
         return 'MacOS support not implemented yet.'
         # todo maybe implement MacOS support to run supproccesses with interactive answers
+
+#     class TextIOTrap:
+#         name = None
+#         buffer = None
+#         encoding = None
+#         errors = None
+#         newlines = None
+#         line_buffering = None
+#
+#         def __init__(self, **args):
+#             self.write_handler = args.get('write_handler', None)
+#             self.name = args.get('name', '-')
+#
+#         def __iter__(self):
+#             return []
+#
+#         def close(self):
+#             pass
+#
+#         def detach(self):
+#             pass
+#
+#         def fileno(self):
+#             return 0
+#
+#         def flush(self):
+#             pass
+#
+#         def isatty(self):
+#             return False
+#
+#         def read(self, n=None):
+#             return ''
+#
+#         def readable(self):
+#             return False
+#
+#         def readline(self, limit=-1):
+#             pass
+#
+#         def readlines(self, hint=-1):
+#             return []
+#
+#         def seek(self, offset, whence=0):
+#             pass
+#
+#         def seekable(self):
+#             return False
+#
+#         def tell(self):
+#             return 0
+#
+#         def truncate(self, size=None):
+#             pass
+#
+#         def writable(self):
+#             return True
+#
+#         def write(self, s):
+#             if self.write_handler and not s == '\n':
+#                 self.write_handler(s)
+#             return 0
+#
+#         def writelines(self, lines):
+#             if isinstance(lines, list):
+#                 for s in lines: self.write(s)

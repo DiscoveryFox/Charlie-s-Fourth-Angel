@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timezone
 import camphish
 import threading
+import json
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
@@ -28,22 +29,28 @@ class Todo(db.Model):
         return '<Task %r' % self.id
 
 
-
-@app.route('/', methods=['POST', 'GET'])
+@app.route('/')
 def index():
+    services = json.loads(open(config['PATHS']['ServicesPath'], "r").read( ))
+    return render_template('index.html', services = services)
+
+
+
+@app.route('/todo', methods=['POST', 'GET'])
+def todo():
     if request.method == 'POST':
         task_content = request.form['content']
         new_task = Todo(content=task_content)
         try:
             db.session.add(new_task)
             db.session.commit( )
-            return redirect('/')
+            return redirect('/todo')
         except:
             return 'There was an Issue adding your task to the database'
 
     else:
         tasks = Todo.query.order_by(Todo.date_created).all( )
-        return render_template('index.html', tasks=tasks)
+        return render_template('todo.html', tasks=tasks)
 
 
 @app.route('/delete/<int:id>')
@@ -53,7 +60,7 @@ def delete(id):
     try:
         db.session.delete(task_to_delete)
         db.session.commit( )
-        return redirect('/')
+        return redirect('/todo')
     except:
         return "There was a Problem deleting that Task"
 
@@ -66,7 +73,7 @@ def update(id):
 
         try:
             db.session.commit( )
-            return redirect('/')
+            return redirect('/todo')
         except:
             return 'There was an issue updating your Task'
     else:
@@ -120,7 +127,6 @@ def return_ips():
         return jsonify(camphish.output.old_connections)
     else:
         return render_template('ips.html', ips=camphish.output.old_connections, time=times)
-
 
 
 @app.route('/stop_camphish', methods=['GET', 'POST'])

@@ -1,0 +1,16 @@
+{
+  "slowloris": {
+    "title" : "Slowloris",
+    "description" : "Slowloris is a DDOS Tool",
+    "path_to_executable" : "/slowloris",
+    "path_to_git" : "https://github.com/gkbrk/slowloris",
+    "installed" : true
+  },
+  "camphish" : {
+    "title" : "CamPhish",
+    "description" : "CamPhish is used to hijack the Camera of Devices",
+    "path_to_executable" : "/CamPhish",
+    "path_to_git" : "https://github.com/techchipnet/CamPhish",
+    "installed" : false
+  }
+}
