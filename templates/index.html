@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
-
+<!--
+todo: hide all the funtions behind a password saved area
+    https://www.digitalocean.com/community/tutorials/how-to-add-authentication-to-your-app-with-flask-login-de
+ -->
 {% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/cards.css') }}">
@@ -8,27 +11,31 @@
 {% block body %}
     <div class="cards">
         {% for service in services %}
-        <div class="card">
-            <div class="card__content">
-                <h1>{{ services[service]['title'] }}</h1>
-                <p id="description">{{ services[service]['description']}}</p>
+            <div class="card">
+                <div class="card__content">
+                    <h1>{{ services[service]['title'] }}</h1>
+                    <p id="description">{{ services[service]['description'] }}</p>
 
+                </div>
+                <div class="card__info">
+                    <div>
+                        <span id="version">Version {{ services[service]['version'] }}</span>
+                    </div>
+                    {% if services[service]['installed'] != true and platform.system() in services[service]['supported_OS'] %}
+                        <div class="card__button">
+                            <a href="/install/{{ services[service]['title'].lower() }}" class="card__link">Install</a>
+                        </div>
+                    {% elif platform.system() in services[service]['supported_OS'] %}
+                        <div class="card__button">
+                            <a href="{{ services[service]['path_on_server'] }}" class="card__link">Launch </a>
+                        </div>
+                    {% else %}
+                        <div>
+                            <a href="#" class="card__link">Not Available</a>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
-            <div class="card__info">
-                <div>
-                    <span id="version">Version {{ services[service]['version']}}</span>
-                </div>
-                {% if services[service]['installed'] != true%}
-                <div class="card__button">
-                    <a href="/install/{{ services[service]['title'].lower() }}" class="card__link">Install</a>
-                </div>
-                {% else %}
-                <div class="card__button">
-                    <a href="{{ services[service]['path_on_server'] }}" class="card__link">Launch </a>
-                </div>
-                {% endif %}
-            </div>
-        </div>
         {% endfor %}
     </div>
 

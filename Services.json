@@ -4,14 +4,16 @@
     "description" : "Slowloris is a DDOS Tool",
     "path_to_git" : "https://github.com/gkbrk/slowloris",
     "path_on_server" : "/slowloris",
+    "supported_OS" : ["Windows", "Darwin", "Linux", "Java"],
     "version" : 1.3,
     "installed" : false
   },
   "camphish" : {
     "title" : "CamPhish",
     "description" : "CamPhish is used to hijack the Camera of Devices",
-    "path_to_git" : "https://github.com/techchipnet/CamPhish",
+    "path_to_git" : "https://github.com/DiscoveryFox/CamPhish",
     "path_on_server" : "/camphish",
+    "supported_OS" : ["Linux"],
     "version" : 1.1,
     "installed" : true
   }

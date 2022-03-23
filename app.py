@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import platform
 import time
 import configparser
 from flask import Flask, render_template, request, redirect, jsonify
@@ -7,6 +8,7 @@ from datetime import datetime, timezone
 import camphish
 import threading
 import json
+import tool_installer
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
@@ -27,6 +29,11 @@ class Todo(db.Model):
 
     def __repr__(self):
         return '<Task %r' % self.id
+
+@app.context_processor
+def add_imports():
+    return dict(platform=platform)
+
 
 
 @app.route('/')
