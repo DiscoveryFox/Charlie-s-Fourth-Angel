@@ -5,7 +5,7 @@
       <paths name="kali@192.168.178.56:22">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/kali/Documents/Website/Charlie-s-Fourth-Angel" local="$PROJECT_DIR$" />
+            <mapping deploy="/home/kali/Documents/Charlie-s-Fourth-Angel" local="$PROJECT_DIR$" />
           </mappings>
         </serverdata>
       </paths>
