@@ -1,24 +1,126 @@
-/*
+body {
+  background-size: cover;
+  height: 100vh;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  overflow: auto;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #333333;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+
+.cards {
+    margin: 0 auto;
+    max-width: 1000px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+    grid-auto-rows: auto;
+    gap: 20px;
+    font-family: sans-serif;
+    padding-top: 30px;
+}
+
+.cards * {
+    box-sizing: border-box;
+}
 
 .card {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 250px);
-  grid-auto-rows: auto;
-  grid-gap: 1rem;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  margin-bottom: .5rem;
-  border: 2px solid #e7e7e7;
-  border-radius: 4px;
-  padding: .5rem;
+    border: 2px solid #333333;
+    background: #fafafa;
 }
 
-.card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+.card__content {
+    line-height: 1.5;
+    font-size: 0.9em;
+    padding: 15px;
+    margin-bottom: auto;
 }
 
-.container {
-  padding: 2px 16px;
+.card__content > p:first-of-type {
+    margin-top: 0;
 }
 
-*/
+.card__content > p:last-of-type {
+    margin-bottom: 0;
+}
+
+.card__info {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #555555;
+    background: #eeeeee;
+    font-size: 0.8em;
+}
+
+.card__info i {
+    font-size: 0.9em;
+    margin-right: 8px;
+}
+
+.card__link {
+    color: #64968c;
+    text-decoration: none;
+}
+
+.card__link:hover {
+    text-decoration: dashed;
+}
+
+.card__button {
+    padding: 5px;
+    border: 1px solid black;
+}

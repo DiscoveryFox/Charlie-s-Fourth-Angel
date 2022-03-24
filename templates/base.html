@@ -14,7 +14,14 @@
     {% block head %}{% endblock %}
 </head>
 <body theme="dark">
-        <nav class="navbar navbar-light">
+        <div class="sidebar">
+            <a href="/" class="active">Tools</a>
+            <a href="/my_machine">My Machine</a>
+            <a href="/security">Security</a>
+            <a href="/settings">Settings</a>
+            <a href="/account">Account</a>
+        </div>
+        <nav class="navbar navbar-light" style="z-index: 0">
             <div class="container" style="margin-right: 200px;
     width: 200px;">
                 <!--  ↑ ↑ ↑ Das Logo  ↑ ↑ ↑ -->
@@ -30,10 +37,11 @@
         <div class="flex">
                 <a class="logo navbar-brand"><img id="logo_img" src="https://raw.githubusercontent.com/DiscoveryFox/Charlie-s-Fourth-Angel/master/favicon_dark.png" title="Charle's Fourth Angel Logo"/></a>
         </div>
-    {% block body %}{% endblock %}
+        <div class="page_content">
+            {% block body %}{% endblock %}
+        </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="{{
-  url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
+    <script>window.jQuery || document.write('<script src="{{url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
 </body>
 
 <script src="{{ url_for('static', filename='js/switch.js') }}"></script>

@@ -5,17 +5,18 @@ todo: hide all the funtions behind a password saved area
  -->
 {% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/cards.css') }}">
 {% endblock %}
 
 {% block body %}
     <div class="cards">
         {% for service in services %}
             <div class="card">
+                <div style="align-content: end">
+                    <a class="button" href="#{{ services[service]['title'].lower() + "_popup"}}" style="float: right; color: black; padding-right: 7px; text-decoration: none">&#9432;</a>
+                </div>
                 <div class="card__content">
                     <h1>{{ services[service]['title'] }}</h1>
                     <p id="description">{{ services[service]['description'] }}</p>
-
                 </div>
                 <div class="card__info">
                     <div>
@@ -30,13 +31,27 @@ todo: hide all the funtions behind a password saved area
                             <a href="{{ services[service]['path_on_server'] }}" class="card__link">Launch </a>
                         </div>
                     {% else %}
-                        <div>
+                        <div class="card__button">
                             <a href="#" class="card__link">Not Available</a>
                         </div>
                     {% endif %}
                 </div>
             </div>
+
         {% endfor %}
     </div>
+    {% for service in services %}
+        <div id="{{ services[service]['title'].lower() + "_popup"}}" class="overlay">
+                <div class="popup">
+                    <!-- <h2>{{ services[service]['title'] }}</h2> -->
+                    <a class="close" href="#">&times;</a>
+                    <div>
+                        {{ services[service]['details']|safe }}
+                    </div>
+                </div>
+            </div>
+    {% endfor %}
 
 {% endblock %}
+
+
