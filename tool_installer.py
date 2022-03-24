@@ -1,9 +1,8 @@
 import os
 import pip
 
-
-def install(pipname=None, gitlink=None):
-    if pipname is None:
+def install(pipname: str= None, gitlink: str=None):
+    if gitlink != None:
         os.system(f'git clone {gitlink}')
     else:
         if hasattr(pip, 'main'):
