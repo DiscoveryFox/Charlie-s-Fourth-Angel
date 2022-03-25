@@ -2,3 +2,4 @@ venv/
 CamPhish/
 .idea/
 __pycache__/
+.push.settings.jsonc
