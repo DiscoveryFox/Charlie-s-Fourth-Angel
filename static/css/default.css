@@ -56,6 +56,14 @@ div.page_content {
     height: 1000px;
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+.body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 
 /* Dark Mode */
 

@@ -124,3 +124,11 @@ body {
     padding: 5px;
     border: 1px solid black;
 }
+
+.overlay::-webkit-scrollbar {
+  display: none;
+}
+.overlay {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

@@ -9,6 +9,7 @@ import camphish
 import threading
 import json
 import tool_installer
+import requests
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
@@ -30,17 +31,16 @@ class Todo(db.Model):
     def __repr__(self):
         return '<Task %r' % self.id
 
+
 @app.context_processor
 def add_imports():
-    return dict(platform=platform)
-
+    return dict(platform=platform, requests=requests)
 
 
 @app.route('/')
 def index():
     services = json.loads(open(config['PATHS']['ServicesPath'], "r").read( ))
-    return render_template('index.html', services = services)
-
+    return render_template('index.html', services=services)
 
 
 @app.route('/todo', methods=['POST', 'GET'])

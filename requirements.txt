@@ -4,3 +4,5 @@ pyngrok~=5.1.0
 rich==12.0.1
 setuptools==60.10.0
 pexpect~=4.8.0
+requests~=2.27.1
+pip~=21.1.2

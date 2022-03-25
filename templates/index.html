@@ -46,7 +46,7 @@ todo: hide all the funtions behind a password saved area
                     <!-- <h2>{{ services[service]['title'] }}</h2> -->
                     <a class="close" href="#">&times;</a>
                     <div>
-                        {{ services[service]['details']|safe }}
+                        {{  requests.get(services[service]['path_to_details']).text }}
                     </div>
                 </div>
             </div>
