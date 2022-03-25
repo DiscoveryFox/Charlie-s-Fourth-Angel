@@ -3,7 +3,7 @@
     "title" : "Slowloris",
     "description" : "Slowloris is a DDOS Tool",
     "details" : "",
-    "path_to_details": "http://www.raw.de",
+    "path_to_details": "https://raw.githubusercontent.com/DiscoveryFox/Charlie-s-Fourth-Angel/master/slowloris_test.html",
     "path_to_git" : "https://github.com/gkbrk/slowloris",
     "path_on_server" : "/slowloris",
     "supported_OS" : ["Windows", "Darwin", "Linux", "Java"],
