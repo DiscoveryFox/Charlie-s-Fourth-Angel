@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}My Machine{% endblock %}
+{% block body %}
+<div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">
+  <div style="width: 500px; height: 500px;">
+    <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);" id="machine_stats_div">
+
+        <table id="machine_stats">
+            <tr>
+                <th>Name</th>
+                <th>Value</th>
+            </tr>
+            {% for key, value in machine_stats.items() %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ value }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    <script>
+        // make an ajax call to /my_machine
+        // and update the machine_stats div
+        // with the response
+        $.ajax({
+            url: '/my_machine',
+            success: function(data) {
+                // update the machine_stats table with the response
+                $('#machine_stats').html(data);
+            }
+        });
+
+    </script>
+    # create a button which makes an ajax call to the server
+    # which will return the current stats of the machine
+    // and update the table
+    </div>
+    </div>
+  </div>
+{% endblock %}

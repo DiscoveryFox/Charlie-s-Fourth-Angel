@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block head %}
+<title>Login</title>
+{% endblock %}
+
+
+{% block body %}
+<div id="d-flex justify-content-center">
+    <h3>Login</h3>
+    <div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-danger" role="alert">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+        {% endwith %}
+        <form method="POST" action="/login">
+            <div>
+                <div>
+                    <input type="email" name="email" placeholder="Your Email" autofocus="">
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <input type="password" name="password" placeholder="Your Password">
+                </div>
+            </div>
+            <div>
+                <label class="checkbox">
+                    <input type="checkbox">
+                    Remember me
+                </label>
+            </div>
+            <button>Login</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
