@@ -17,22 +17,45 @@
                 </tr>
             {% endfor %}
         </table>
+    <button onclick="refresh_stats()" value="refresh values"></button>
+    <!-- todo: test if this is working and then integrate an api key so its safe and u cant access it without permission -->
     <script>
-        // make an ajax call to /my_machine
-        // and update the machine_stats div
-        // with the response
-        $.ajax({
-            url: '/my_machine',
-            success: function(data) {
-                // update the machine_stats table with the response
-                $('#machine_stats').html(data);
-            }
-        });
+        function refresh_stats() {
+            // alert the user that the page is refreshing
+            console.log("refreshing");
+            // make an api call to get the machine stats and present them in the table
+            var machine_stats_div = document.getElementById('machine_stats_div');
+            var machine_stats_table = document.getElementById('machine_stats');
+            var machine_stats_url = '/api/v1/get_stats';
+            var machine_stats_request = new XMLHttpRequest();
+            machine_stats_request.open('GET', machine_stats_url, true);
+            machine_stats_request.setRequestHeader('Content-Type', 'application/json');
+            machine_stats_request.setRequestHeader('X-Api-Key', '{{ api_key }}');
+            machine_stats_request.onload = function() {
+                if (machine_stats_request.status >= 200 && machine_stats_request.status < 400) {
+                    while (machine_stats_table.rows.length > 1) {
+                        machine_stats_table.deleteRow(1);
+                    }
 
+                    var machine_stats = JSON.parse(machine_stats_request.responseText);
+                    for (var key in machine_stats) {
+                        var row = document.createElement('tr');
+                        var name_cell = document.createElement('td');
+                        var value_cell = document.createElement('td');
+                        name_cell.innerHTML = key;
+                        value_cell.innerHTML = machine_stats[key];
+                        row.appendChild(name_cell);
+                        row.appendChild(value_cell);
+                        machine_stats_table.appendChild(row);
+                        console.log('values got refreshed');
+                    }
+                } else {
+                    console.log('error');
+                }
+            };
+            machine_stats_request.send();
+            }
     </script>
-    # create a button which makes an ajax call to the server
-    # which will return the current stats of the machine
-    // and update the table
     </div>
     </div>
   </div>

@@ -2,9 +2,12 @@
 import platform
 import time
 import configparser
-from flask import Flask, render_template, request, redirect, jsonify, url_for, flash
+from functools import wraps
+
+from flask import Flask, render_template, request, redirect, jsonify, url_for, flash, g
 from flask_login import UserMixin, login_required, current_user, login_user, LoginManager, logout_user
 from flask_sqlalchemy import SQLAlchemy
+from flask_restful import Resource, Api, abort, reqparse
 from datetime import datetime, timezone
 
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -21,26 +24,19 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'secret'
+
 db = SQLAlchemy(app)
+
+API = Api(app)
 
 login_manager = LoginManager( )
 login_manager.login_view = 'login'
 login_manager.init_app(app)
 
 times = list( )
-
 # Set up Config Parser
 config = configparser.ConfigParser( )
 config.read('app.cfg')
-
-
-class Todo(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.String(200), nullable=False)
-    date_created = db.Column(db.DateTime, default=datetime.now(timezone.utc))
-
-    def __repr__(self):
-        return '<Task %r' % self.id
 
 
 class User(UserMixin, db.Model):
@@ -48,6 +44,25 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(120))
     name = db.Column(db.String(120))
+
+
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        if not current_user.is_authenticated:
+            return {'message': 'Token is missing'}, 401
+        return f(*args, **kwargs)
+
+    return decorated
+
+
+class ownrecource(Resource):
+    @token_required
+    def get(self):
+        return machine_stats.get_stats( )
+
+
+API.add_resource(ownrecource, '/api/v1/get_stats')
 
 
 @app.context_processor
@@ -121,53 +136,6 @@ def register():
 def index():
     services = json.loads(open(config['PATHS']['ServicesPath'], "r").read( ))
     return render_template('index.html', services=services)
-
-
-@app.route('/todo', methods=['POST', 'GET'])
-@login_required
-def todo():
-    if request.method == 'POST':
-        task_content = request.form['content']
-        new_task = Todo(content=task_content)
-        try:
-            db.session.add(new_task)
-            db.session.commit( )
-            return redirect('/todo')
-        except:
-            return 'There was an Issue adding your task to the database'
-
-    else:
-        tasks = Todo.query.order_by(Todo.date_created).all( )
-        return render_template('todo.html', tasks=tasks)
-
-
-@app.route('/delete/<int:id>')
-@login_required
-def delete(id):
-    task_to_delete = Todo.query.get_or_404(id)
-
-    try:
-        db.session.delete(task_to_delete)
-        db.session.commit( )
-        return redirect('/todo')
-    except:
-        return "There was a Problem deleting that Task"
-
-
-@app.route('/update/<int:id>', methods=['GET', 'POST'])
-@login_required
-def update(id):
-    task = Todo.query.get_or_404(id)
-    if request.method == 'POST':
-        task.content = request.form['content']
-
-        try:
-            db.session.commit( )
-            return redirect('/todo')
-        except:
-            return 'There was an issue updating your Task'
-    else:
-        return render_template('update.html', task=task)
 
 
 @app.route("/my_machine", methods=["GET", "POST"])
