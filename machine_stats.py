@@ -46,4 +46,3 @@ def get_stats():
     }
 
 
-print(get_stats( ))

@@ -30,7 +30,6 @@
             var machine_stats_request = new XMLHttpRequest();
             machine_stats_request.open('GET', machine_stats_url, true);
             machine_stats_request.setRequestHeader('Content-Type', 'application/json');
-            machine_stats_request.setRequestHeader('X-Api-Key', '{{ api_key }}');
             machine_stats_request.onload = function() {
                 if (machine_stats_request.status >= 200 && machine_stats_request.status < 400) {
                     while (machine_stats_table.rows.length > 1) {
