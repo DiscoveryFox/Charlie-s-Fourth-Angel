@@ -8,29 +8,16 @@ title="Charle's Fourth Angel Logo"/></p>
 <hr/>
 
 <p>A website that allows the user to use many common hacking scripts, normally only executable in the terminal, based on
-a simple GUI. The GUI is designed that it's understandable for everybody. There are 2 different Mode's.
+a simple GUI. The GUI is designed that it's understandable for everybody.
 <br>
 </p>
 
-<table>
-    <tr>
-        <td style="width: 300px; text-align: left">Simple Mode </td>
-        <td style="width: 300px">This is the simple mode. Every Person should be able to use the Website in this mode. 
-        And the best Thing is that you don't even lose any functionality. It's just maybe a little faster for more 
-        experienced people to use the Advanced Mode</td>
-    </tr>
-    <tr>
-        <td style="width: 300px">Advanced Mode</td>
-        <td style="width: 300px">This is the Advanced Mode. The interface may look very complicated at the first look, 
-        but with a little training and know-how, this interface can also be mastered very quickly and efficient.</td>
-    </tr>
-    
 
-</table>
 
 <h3> List of features </h3>
 
 <ul>
+  <h1> <b style="color: red; margin: 0">NOT COMPLETED</b> </h1></h1>
   <li>4 Different DDOS/DOS Attack Tools</li> 
   <li>2 Browser Camera Attack Scripts</li>
   <li>6 Different Keylogger</li>
