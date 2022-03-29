@@ -52,6 +52,29 @@ body {
   overflow: auto;
 }
 
+.grid-container {
+  position: absolute;
+  top: 70px;
+  left: 20px;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0);
+  padding: 20px;
+  font-size: 30px;
+}
+
+.popup h1 {
+    margin-bottom: 60px;
+}
+
+.not-supported {
+    color: red;
+}
+.supported {
+    color: green;
+}
 @media screen and (max-width: 700px){
   .box{
     width: 70%;

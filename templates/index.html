@@ -5,6 +5,7 @@ todo: hide all the funtions behind a password saved area
  -->
 {% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <script src="https://kit.fontawesome.com/9317471e67.js" crossorigin="anonymous"></script>
 {% endblock %}
 
 {% block body %}
@@ -45,6 +46,28 @@ todo: hide all the funtions behind a password saved area
                 <div class="popup">
                     <!-- <h2>{{ services[service]['title'] }}</h2> -->
                     <a class="close" href="#">&times;</a>
+                <div class="grid-container">
+                    {% if 'Windows' in services[service]['supported_OS'] %}
+                        <abbr title="Windows supported!"><i class="fa-brands fa-windows grid-item supported"></i></abbr>
+                    {% else %}
+                        <abbr title="Windows not supported!"><i class="fa-brands fa-windows grid-item not-supported"></i></abbr>
+                    {% endif %}
+                    {% if 'Linux' in services[service]['supported_OS'] %}
+                        <abbr title="Linux supported!"><i class="fa-brands fa-linux grid-item supported"></i></abbr>
+                    {% else %}
+                        <abbr title="Linux not supported!"><i class="fa-brands fa-linux grid-item not-supported"></i></abbr>
+                    {% endif %}
+                    {% if 'Darwin' in services[service]['supported_OS'] %}
+                        <abbr title="MacOS supported!"><i class="fa-brands fa-apple grid-item supported"></i></abbr>
+                    {% else %}
+                        <abbr title="MacOS not supported!"><i class="fa-brands fa-apple grid-item not-supported"></i></abbr>
+                    {% endif %}
+                    {% if 'Java' in services[service]['supported_OS'] %}
+                        <abbr title="JavaOS supported!"><i class="fa-brands fa-java grid-item supported"></i></abbr>
+                    {% else %}
+                        <abbr title="JavaOS not supported!"><i class="fa-brands fa-java grid-item not-supported"></i></abbr>
+                    {% endif %}
+                </div>
                     <div>
                         {{  requests.get(services[service]['path_to_details']).text|safe }}
                     </div>
