@@ -28,6 +28,9 @@ a simple GUI. The GUI is designed that it's understandable for everybody.
 
 
 <h3> Download & Installation </h3>
+<h1> <b style="color: red; margin: 0">INSTALLATION WON'T WORK THIS WAY</b> </h1>
+<p> You need to install the pip dependencies first on your own. </p>
+<p> Python Version: 3.10(min. 3.8 because of type annotations)</p>
 
 ```shell
 $ git clone https://github.com/DiscoveryFox/Charlie-s-Fourth-Angel
