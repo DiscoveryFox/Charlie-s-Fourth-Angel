@@ -179,6 +179,13 @@ def account():
     return render_template('account.html', users=users)
 
 
+@app.route('/security')
+@login_required
+def security():
+    users = User.query.all( )
+    return render_template('security.html', users=users, current_user=current_user)
+
+
 @app.route('/camphish/', methods=['GET', 'POST'])
 @login_required
 def camphish_create() -> str:

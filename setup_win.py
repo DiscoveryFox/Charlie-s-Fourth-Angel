@@ -1,7 +1,8 @@
 import os
-from shlex import quote as shlex_quote
 
 # get path of the current directory
+import sys
+
 cwd = os.getcwd( )
 
 
@@ -11,7 +12,7 @@ def customize_app():
         lines = f.readlines( )
         for i, line in enumerate(lines):
             if 'ServicesPath' in line:
-                lines[i] = 'ServicesPath = ' + shlex_quote(cwd + '/Services.json') + '\r\n'
+                lines[i] = 'ServicesPath = ' + cwd + '/Services.json' + '\r\n'
 
     # write the new app.cfg file
     with open(cwd + '/app.cfg', 'w') as f:
@@ -33,6 +34,8 @@ def make_executables():
 
 
 # install the requirements through pip
+def install_requirements():
+    os.system('pip install -r requirements.txt')
 
 
 if __name__ == '__main__':
@@ -41,4 +44,7 @@ if __name__ == '__main__':
     # customize the app.cfg file
     customize_app( )
     # make the executables
-    make_executables( )
+    # make_executables( )
+    # install the requirements
+    install_requirements( )
+    sys.exit(0)

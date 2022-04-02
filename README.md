@@ -21,7 +21,7 @@ a simple GUI. The GUI is designed that it's understandable for everybody.
   <li>4 Different DDOS/DOS Attack Tools</li> 
   <li>2 Browser Camera Attack Scripts</li>
   <li>6 Different Keylogger</li>
-  <li>3 Wlan Attacks</li>
+  <li> 3 Wlan Attacks</li>
 </ul>
 
 [//]: # (todo I still need to implement these Features they are not completed. Also need to count them)
