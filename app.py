@@ -4,6 +4,7 @@ import time
 import configparser
 from functools import wraps
 
+import jwt as jwt
 from flask import Flask, render_template, request, redirect, jsonify, url_for, flash, g
 from flask_login import UserMixin, login_required, current_user, login_user, LoginManager, logout_user
 from flask_sqlalchemy import SQLAlchemy
@@ -52,6 +53,23 @@ def token_required(f):
         if not current_user.is_authenticated:
             return {'message': 'Token is missing'}, 401
         return f(*args, **kwargs)
+
+        """
+        token = None
+
+        if 'x-access-token' in request.headers:
+            token = request.headers['x-access-token']
+
+        if not token:
+            return jsonify({'message': 'Token is missing!'}), 401
+
+        try:
+            data = jwt.decode(token, app.config['SECRET_KEY'])
+            current_user = User.query.filter_by(id=data['id']).first( )
+        except:
+            return jsonify({'message': 'Token is invalid!'}), 401
+
+        return f(current_user, *args, **kwargs)"""
 
     return decorated
 
@@ -147,6 +165,20 @@ def my_machine():
         return render_template("my_machine.html", user=current_user, machine_stats=machine_stats.get_stats( ))
 
 
+@app.route('/settings')
+@login_required
+def settings():
+    return render_template('settings.html')
+
+
+@app.route('/account')
+@login_required
+def account():
+    # create a list with all users from the datanbase
+    users = User.query.all( )
+    return render_template('account.html', users=users)
+
+
 @app.route('/camphish/', methods=['GET', 'POST'])
 @login_required
 def camphish_create() -> str:
@@ -160,8 +192,6 @@ def camphish_create() -> str:
         ngrok_url_thread = camphish.custom_thread(target=camphish.camphish, args=(int(template), auth),
                                                   daemon=True)
         ngrok_url_thread.start( )
-
-        print('FUNKTION GESTARTET')
 
         # print(service, template, ngrok_url)
 

