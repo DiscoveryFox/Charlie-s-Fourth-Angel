@@ -28,19 +28,18 @@ int main() {
             fputs(line, file);
         }
     }
-
-    const int SIZE = 5;
-    int apps_to_install[SIZE];
-    apps_to_install[0] = "app.py";
-    apps_to_install[1] = "get_ip.sh";
-    apps_to_install[2] = "startcam.sh";
-    apps_to_install[3] = "start.py";
-    apps_to_install[4] = "tool_installer.py";
+    // close the file
+    fclose(file);
     // make executables from apps_to_install
     // loop through apps_to_install and make them executable
-    for (int i = 0; i < SIZE; i++) {
-        system("chmod +x " + apps_to_install[i]);
-    }
+
+    system("chmod +x app.py");
+    system("chmod +x get_ip.sh");
+    system("chmod +x startcam.sh");
+    system("chmod +x start.py");
+    system("chmod +x tool_installer.py");
+
+
     // install all requirements through pip
     system("apt-get install -y python3-pip");
     system("pip3 install -r requirements.txt");

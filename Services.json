@@ -18,5 +18,20 @@
     "supported_OS" : ["Linux"],
     "version" : 1.5,
     "installed" : true
+  },
+  "nmap" : {
+    "title": "Nmap",
+    "description": "Nmap is a Network Mapper",
+    "path_to_details": "https://raw.githubusercontent.com/DiscoveryFox/Charlie-s-Fourth-Angel/master/test.html",
+    "path_to_git": "",
+    "path_on_server": "/nmap",
+    "supported_OS": [
+      "Windows",
+      "Darwin",
+      "Linux",
+      "Java"
+    ],
+    "version": 1.0,
+    "installed": true
   }
 }

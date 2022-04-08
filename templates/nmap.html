@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>nmap</title>
+{% endblock %}
+
+{% block body %}
+
+    <h1>nmap</h1>
+    <!--
+        // make a input where the user can enter the ip address
+        // the input should be a valid ip address
+            // if the ip address is valid, the user should be able to click a button
+            // the button should call the nmap function
+            // the nmap function should be called with the ip address as an argument
+    // the user should also be able to insert a port number
+    // the port number should be a valid port number and be an argument for the nmap function aswell
+
+    // both inputs should be in the middle of the page and be centered
+    // they should have round borders and a gray background
+    // the button should be centered aswell but under the inputs
+    // the button should have a round border and a gray background
+
+    if the user clicks the button
+        // the nmap function should be called with the ip address and the port number as arguments
+        // the nmap function should return a string
+        // the string should be displayed in the body of the page
+    }
+
+    input: ip address
+    input: port number
+    button: nmap
+    output: nmap output
+
+    create the elements
+    -->
+    <div>
+        <input type="text" id="ip" placeholder="ip address">
+        <input type="text" id="port" placeholder="port number">
+        <button id="nmap" onclick="nmap()">nmap</button>
+    </div>
+
+    <div id="output">
+
+
+    </div>
+
+    <script>
+
+    nmap = function () {
+        var ip = document.getElementById("ip").value;
+        var port = document.getElementById("port").value;
+        var xhttp = new XMLHttpRequest();
+        // create a post request to /mmap with the information from the form above
+        xhttp.open("POST", "/nmap", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("ip=" + ip + "&port=" + port);
+        xhttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                document.getElementById("output").innerHTML = this.responseText;
+            }
+        };
+    }
+
+    </script>
+{% endblock %}

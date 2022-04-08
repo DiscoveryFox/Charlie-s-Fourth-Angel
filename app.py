@@ -3,10 +3,11 @@ import platform
 import time
 import configparser
 from functools import wraps
-
+import
 import jwt as jwt
 from flask import Flask, render_template, request, redirect, jsonify, url_for, flash, g
-from flask_login import UserMixin, login_required, current_user, login_user, LoginManager, logout_user
+from flask_login import UserMixin, login_required, current_user, login_user, LoginManager, \
+    logout_user
 from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Resource, Api, abort, reqparse
 from datetime import datetime, timezone
@@ -16,6 +17,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import camphish
 import threading
 import json
+
+import service_nmap
 import tool_installer
 import requests
 from secrets import compare_digest
@@ -30,13 +33,13 @@ db = SQLAlchemy(app)
 
 API = Api(app)
 
-login_manager = LoginManager( )
+login_manager = LoginManager()
 login_manager.login_view = 'login'
 login_manager.init_app(app)
 
-times = list( )
+times = list()
 # Set up Config Parser
-config = configparser.ConfigParser( )
+config = configparser.ConfigParser()
 config.read('app.cfg')
 
 
@@ -77,7 +80,7 @@ def token_required(f):
 class ownrecource(Resource):
     @token_required
     def get(self):
-        return machine_stats.get_stats( )
+        return machine_stats.get_stats()
 
 
 API.add_resource(ownrecource, '/api/v1/get_stats')
@@ -107,7 +110,7 @@ def login():
 
         remember = True if request.form.get("remember") else False
 
-        user = User.query.filter_by(email=email).first( )
+        user = User.query.filter_by(email=email).first()
 
         if user and check_password_hash(user.password, password):
             login_user(user, remember=remember)
@@ -123,7 +126,7 @@ def login():
 @login_required
 def logout():
     flash("You have been logged out")
-    logout_user( )
+    logout_user()
     return redirect("/")
 
 
@@ -134,16 +137,17 @@ def register():
         email = request.form.get("email")
         password = request.form.get("password")
         name = request.form.get("name")
-        user = User.query.filter_by(email=email).first( )
+        user = User.query.filter_by(email=email).first()
 
         if user:
             flash("Email address already exists")
             return redirect(url_for("register"))
 
-        new_user = User(email=email, password=generate_password_hash(password, method="sha256"), name=name)
+        new_user = User(email=email, password=generate_password_hash(password, method="sha256"),
+                        name=name)
 
         db.session.add(new_user)
-        db.session.commit( )
+        db.session.commit()
         return redirect(url_for("login"))
     else:
         return render_template("register.html")
@@ -152,7 +156,7 @@ def register():
 @app.route('/')
 @login_required
 def index():
-    services = json.loads(open(config['PATHS']['ServicesPath'], "r").read( ))
+    services = json.loads(open(config['PATHS']['ServicesPath'], "r").read())
     return render_template('index.html', services=services)
 
 
@@ -160,9 +164,10 @@ def index():
 @login_required
 def my_machine():
     if request.method == "POST":
-        return machine_stats.get_stats( )
+        return machine_stats.get_stats()
     else:
-        return render_template("my_machine.html", user=current_user, machine_stats=machine_stats.get_stats( ))
+        return render_template("my_machine.html", user=current_user,
+                               machine_stats=machine_stats.get_stats())
 
 
 @app.route('/settings')
@@ -175,14 +180,14 @@ def settings():
 @login_required
 def account():
     # create a list with all users from the datanbase
-    users = User.query.all( )
+    users = User.query.all()
     return render_template('account.html', users=users)
 
 
 @app.route('/security')
 @login_required
 def security():
-    users = User.query.all( )
+    users = User.query.all()
     return render_template('security.html', users=users, current_user=current_user)
 
 
@@ -196,14 +201,15 @@ def camphish_create() -> str:
         auth = "test"
         # ngrok_url = camphish.camphish(int(service), int(template), autthoken=auth)
         global ngrok_url_thread
-        ngrok_url_thread = camphish.custom_thread(target=camphish.camphish, args=(int(template), auth),
+        ngrok_url_thread = camphish.custom_thread(target=camphish.camphish,
+                                                  args=(int(template), auth),
                                                   daemon=True)
-        ngrok_url_thread.start( )
+        ngrok_url_thread.start()
 
         # print(service, template, ngrok_url)
 
         def check_connection():
-            before_connections = list( )
+            before_connections = list()
             global times
             while True:
                 if before_connections != camphish.output.connections:
@@ -211,13 +217,13 @@ def camphish_create() -> str:
                     print(f'{camphish.output.connections} | just clicked the Link.')
                     camphish.output.old_connections.append(camphish.output.connections[0])
                     times.append(datetime.now(timezone.utc))
-                    camphish.output.connections.clear( )
+                    camphish.output.connections.clear()
                     time.sleep(2)
                 else:
                     time.sleep(2)
 
         check_thread = threading.Thread(target=check_connection, daemon=True)
-        check_thread.start( )
+        check_thread.start()
         while camphish.output.link is None:
             pass
         return render_template('Camphish.html', ngrok_url=camphish.output.link, ownSwitch=True)
@@ -237,7 +243,7 @@ def return_ips():
 @app.route('/stop_camphish', methods=['GET', 'POST'])
 @login_required
 def stop_camphish():
-    ngrok_url_thread.stop( )
+    ngrok_url_thread.stop()
     return redirect('/CamPhish')
 
 
@@ -252,14 +258,15 @@ def process():
 
     global ngrok_url_thread
 
-    ngrok_url_thread = camphish.custom_thread(target=camphish.camphish, args=(int(service), int(template), auth),
+    ngrok_url_thread = camphish.custom_thread(target=camphish.camphish,
+                                              args=(int(service), int(template), auth),
                                               daemon=True)
-    ngrok_url_thread.start( )
+    ngrok_url_thread.start()
 
     print('FUNKTION GESTARTET')
 
     def check_connection():
-        before_connections = list( )
+        before_connections = list()
         global times
         while True:
             if before_connections != camphish.output.connections:
@@ -267,16 +274,33 @@ def process():
                 print(f'{camphish.output.connections} | just clicked the Link.')
                 camphish.output.old_connections.append(camphish.output.connections[0])
                 times.append(datetime.now(timezone.utc))
-                camphish.output.connections.clear( )
+                camphish.output.connections.clear()
                 time.sleep(2)
             else:
                 time.sleep(2)
 
     check_thread = threading.Thread(target=check_connection, daemon=True)
-    check_thread.start( )
+    check_thread.start()
     while camphish.output.link is None:
         pass
     return camphish.output.link
+
+
+@app.route('/nmap')
+@login_required
+def nmap():
+    # check if the request ist post or get
+    if request.method == 'GET':
+        return render_template('nmap.html')
+    else:
+        # get the ip address from the form
+        ip = request.form['ip']
+        port = requests.form['port']
+        # call the nmap function
+        service_nmap.usenmap(ip, port)
+        # return the result
+        return render_template('nmap.html', result=nmap.output)
+
 
 
 if __name__ == '__main__':

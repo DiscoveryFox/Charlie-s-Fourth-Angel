@@ -2,8 +2,9 @@ Flask~=2.0.3
 psutil~=5.9.0
 pyngrok~=5.1.0
 rich==12.0.1
-setuptools==61.2.0
-pexpect~=4.8.0
 requests~=2.27.1
 pip==22.0.4
 Werkzeug~=2.0.3
+jwt~=1.3.1
+Frozen-Flask~=0.18
+python-nmap~=0.7.1
