@@ -1,9 +1,9 @@
 .venv/
-.CamPhish/
+CamPhish/
 .idea/
 __pycache__/
 .push.settings.jsonc
-.dist/
+dist/
 .vscode/
 .vscode-test/
-.build/
+build/
