@@ -3,8 +3,6 @@ import platform
 import time
 import configparser
 from functools import wraps
-import
-import jwt as jwt
 from flask import Flask, render_template, request, redirect, jsonify, url_for, flash, g
 from flask_login import UserMixin, login_required, current_user, login_user, LoginManager, \
     logout_user
@@ -57,22 +55,25 @@ def token_required(f):
             return {'message': 'Token is missing'}, 401
         return f(*args, **kwargs)
 
+        # noinspection PyUnreachableCode
         """
-        token = None
-
-        if 'x-access-token' in request.headers:
-            token = request.headers['x-access-token']
-
-        if not token:
-            return jsonify({'message': 'Token is missing!'}), 401
-
-        try:
-            data = jwt.decode(token, app.config['SECRET_KEY'])
-            current_user = User.query.filter_by(id=data['id']).first( )
-        except:
-            return jsonify({'message': 'Token is invalid!'}), 401
-
-        return f(current_user, *args, **kwargs)"""
+                token = None
+        
+                if 'x-access-token' in request.headers:
+                    token = request.headers['x-access-token']
+        
+                if not token:
+                    return jsonify({'message': 'Token is missing!'}), 401
+        
+                try:
+                    data = jwt.decode(token, app.config['SECRET_KEY'])
+                    current_user = User.query.filter_by(id=data['id']).first( )
+                except:
+                    return jsonify({'message': 'Token is invalid!'}), 401
+        
+                return f(current_user, *args, **kwargs)
+                
+                """
 
     return decorated
 
@@ -304,4 +305,5 @@ def nmap():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    # noinspection FlaskDebugMode
+    app.run(host='0.0.0.0', port=80, debug=True)
