@@ -287,7 +287,7 @@ def process():
     return camphish.output.link
 
 
-@app.route('/nmap')
+@app.route('/nmap', methods=['GET', 'POST'])
 @login_required
 def nmap():
     # check if the request ist post or get
@@ -295,15 +295,18 @@ def nmap():
         return render_template('nmap.html')
     else:
         # get the ip address from the form
-        ip = request.form['ip']
-        port = requests.form['port']
-        # call the nmap function
-        service_nmap.usenmap(ip, port)
-        # return the result
-        return render_template('nmap.html', result=nmap.output)
+        data = request.data
 
+        # convert the data to json
+        data = json.loads(data)
+        ip = data['ip']
+        port = data['port']
+        # call the nmap function
+        nmap_output = service_nmap.usenmap(ip, port)
+        # return the result
+        return nmap_output
 
 
 if __name__ == '__main__':
     # noinspection FlaskDebugMode
-    app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(host='0.0.0.0', debug=True)

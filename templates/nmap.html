@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
+    <!--suppress ALL -->
     <title>nmap</title>
 {% endblock %}
 
@@ -42,24 +43,107 @@
 
     <div id="output">
 
-
+    <!-- create a table that's centered on the div and has round borders -->
+        <table id="outputtable" style="margin: 0 auto; border: 1px solid black; border-radius: 25px;">
+            <thead>
+                <tr>
+                    <th style="padding: 10px">Host</th>
+                    <th style="padding: 10px">Port</th>
+                    <th style="padding: 10px">Status</th>
+                    <th style="padding: 10px">Time to scan</th>
+                    <th style="padding: 10px">Lorem Ipsum</th>
+                    <th style="padding: 10px">Protocol</th>
+                    <th style="padding: 10px">Service</th>
+                </tr>
+            </thead>
+            <tbody id="outputbody">
+            </tbody>
+        </table>
     </div>
 
     <script>
 
     nmap = function () {
-        var ip = document.getElementById("ip").value;
-        var port = document.getElementById("port").value;
-        var xhttp = new XMLHttpRequest();
+        const ip = document.getElementById("ip").value;
+        const port = document.getElementById("port").value;
         // create a post request to /mmap with the information from the form above
-        xhttp.open("POST", "/nmap", true);
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("ip=" + ip + "&port=" + port);
-        xhttp.onreadystatechange = function () {
-            if (this.readyState === 4 && this.status === 200) {
-                document.getElementById("output").innerHTML = this.responseText;
+
+        const data = {
+            ip: ip,
+            port: port
+        }
+        // create a post http request to /nmap with the data from the form above as a json object
+        // the response should be a string
+
+        fetch('/nmap', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(function (response) {
+            return response.text();
+        }).then(function (text) {
+            // parse the text into a json object
+            // display the json object in the body of the page as a table
+            // with the keys as the table headers and the values as the table rows
+            // the table should be in the middle of the page
+            // the table should have round borders and a gray background
+
+            const output = document.getElementById("outputbody");
+            const json = JSON.parse(text);
+            //console.log(json);
+            // get length of json object
+            const lengthofjson = Object.keys(json).length;
+
+            // loop through the json object and through subkey/subvalue pairs and display them in the table
+            for (let i = 0; i < lengthofjson; i++) {
+                i = i+1;
+                console.log(json);
+                const host = document.getElementById("ip").value;
+                const port =  document.getElementById("port").value;
+                if (json.nmap.scanstats.uphosts === "0") {
+                    const status = "down";
+                } else {
+                    const status = "up";
+                }
+                const row = document.createElement("tr");
+                const hostcell = document.createElement("td");
+                const statuscell = document.createElement("td");
+                const portcell = document.createElement("td");
+                hostcell.innerHTML = host;
+                statuscell.innerHTML = status;
+                portcell.innerHTML = port;
+                row.appendChild(hostcell);
+                row.appendChild(statuscell);
+                row.appendChild(portcell);
+                output.appendChild(row);
             }
-        };
+
+
+
+            {#console.log(lengthofjson);
+            for (let i = 0; i < lengthofjson; i++) {
+                const row = output.insertRow(i);
+                for (let key in json[i]) {
+                    const cell = row.insertCell(0);
+                    cell.innerHTML = json[i][key];
+                }
+            }#}
+
+
+            ///document.getElementById("output").innerHTML = text;
+        });
+
+        /// $.post("/nmap", data, function(response){
+            // get the stats from the response and display them in the output div
+            // the response is a json object
+            // the stats should be displayed in the output div
+            //const data = JSON.parse(response.responseText);
+            /// const data = response.responseText;
+            /// console.log('data: ', data);
+            /// document.getElementById("output").innerHTML = data;
+        /// });
     }
 
     </script>
