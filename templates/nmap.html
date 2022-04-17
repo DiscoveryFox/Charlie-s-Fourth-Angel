@@ -99,25 +99,34 @@
             // loop through the json object and through subkey/subvalue pairs and display them in the table
             for (let i = 0; i < lengthofjson; i++) {
                 i = i+1;
-                console.log(json);
-                const host = document.getElementById("ip").value;
-                const port =  document.getElementById("port").value;
-                if (json.nmap.scanstats.uphosts === "0") {
-                    const status = "down";
-                } else {
-                    const status = "up";
-                }
+                var statuscell;
+                console.log(json["nmap"]);
                 const row = document.createElement("tr");
+
+                const host = document.getElementById("ip").value;
                 const hostcell = document.createElement("td");
-                const statuscell = document.createElement("td");
-                const portcell = document.createElement("td");
                 hostcell.innerHTML = host;
-                statuscell.innerHTML = status;
+
+                const port =  document.getElementById("port").value;
+                const portcell = document.createElement("td");
                 portcell.innerHTML = port;
+
+                if (json["nmap"]["scanstats"]["uphosts"] === "0") {
+                    console.log(json["nmap"]["scanstats"]["uphosts"]);
+                    var statuscell = document.createElement("td");
+                    statuscell.innerHTML = "down";
+                } else {
+                    console.log(json["nmap"]["scanstats"]["uphosts"]);
+                    var statuscell = document.createElement("td");
+                    statuscell.innerHTML = "up";
+                };
+
+                console.log("now appending to row");
                 row.appendChild(hostcell);
-                row.appendChild(statuscell);
                 row.appendChild(portcell);
+                row.appendChild(statuscell);
                 output.appendChild(row);
+                console.log(output)
             }
 
 
