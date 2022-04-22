@@ -3,6 +3,14 @@
 {% block head %}
     <!--suppress ALL -->
     <title>nmap</title>
+    <style>
+        td {
+            padding: 5px;
+            border-left: black 1px solid;
+            text-align: center;
+        }
+
+    </style>
 {% endblock %}
 
 {% block body %}
@@ -47,13 +55,13 @@
         <table id="outputtable" style="margin: 0 auto; border: 1px solid black; border-radius: 25px;">
             <thead>
                 <tr>
-                    <th style="padding: 10px">Host</th>
-                    <th style="padding: 10px">Port</th>
-                    <th style="padding: 10px">Status</th>
-                    <th style="padding: 10px">Time to scan</th>
-                    <th style="padding: 10px">Lorem Ipsum</th>
-                    <th style="padding: 10px">Protocol</th>
-                    <th style="padding: 10px">Service</th>
+                    <th style="padding: 10px; border-bottom: black 1px solid">Host</th>
+                    <th style="padding: 10px; border-bottom: black 1px solid">Port</th>
+                    <th style="padding: 10px; border-bottom: black 1px solid">Status</th>
+                    <th style="padding: 10px; border-bottom: black 1px solid">Time to scan</th>
+                    <th style="padding: 10px; border-bottom: black 1px solid">Date of scan</th>
+                    <th style="padding: 10px; border-bottom: black 1px solid">Protocol</th>
+                    <th style="padding: 10px; border-bottom: black 1px solid">Service</th>
                 </tr>
             </thead>
             <tbody id="outputbody">
@@ -121,10 +129,31 @@
                     statuscell.innerHTML = "up";
                 };
 
+                const timecell = document.createElement("td");
+                timecell.innerHTML = json["nmap"]["scanstats"]["elapsed"] + "s";
+
+                ///const timestartcell = document.createElement("td");
+                ///timestartcell.innerHTML = json["nmap"]["scanstats"]["timestr"];
+                // remove the year at the end of the date
+                // the input looks something like this:
+                // 	Thu Apr 21 18:07:55 2022
+                // the output should look like this:
+                // 	Thu Apr 21 18:07:55
+
+
+                const timetestcell = document.createElement("td");
+                timetestcell.innerHTML = json["nmap"]["scanstats"]["timestr"].slice(0, -4);
+
+
+
+
                 console.log("now appending to row");
                 row.appendChild(hostcell);
                 row.appendChild(portcell);
                 row.appendChild(statuscell);
+                row.appendChild(timecell);
+                //row.appendChild(timestartcell);
+                row.appendChild(timetestcell);
                 output.appendChild(row);
                 console.log(output)
             }

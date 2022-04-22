@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <!--suppress ALL -->
+    <title>nmap</title>
+    <style>
+        td {
+            padding: 5px;
+            border-left: black 1px solid;
+            text-align: center;
+        }
+
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <h1>nmap</h1>
+    <!--
+        // make a input where the user can enter the ip address
+        // the input should be a valid ip address
+            // if the ip address is valid, the user should be able to click a button
+            // the button should call the nmap function
+            // the nmap function should be called with the ip address as an argument
+    // the user should also be able to insert a port number
+    // the port number should be a valid port number and be an argument for the nmap function aswell
+
+    // both inputs should be in the middle of the page and be centered
+    // they should have round borders and a gray background
+    // the button should be centered aswell but under the inputs
+    // the button should have a round border and a gray background
+
+    if the user clicks the button
+        // the nmap function should be called with the ip address and the port number as arguments
+        // the nmap function should return a string
+        // the string should be displayed in the body of the page
+    }
+
+    input: ip address
+    input: port number
+    button: nmap
+    output: nmap output
+
+    create the elements
+    -->
+    <div>
+        <input type="text" id="ip" placeholder="ip address">
+        <input type="text" id="port" placeholder="port number">
+        <button id="nmap" onclick="nmap()">nmap</button>
+    </div>
+
+    <div id="output_buttons">
+
+    </div>
+
+
+    <div id="outputbody">
+
+    </div>
+
+    <script>
+
+    nmap = function () {
+        const ip = document.getElementById("ip").value;
+        const port = document.getElementById("port").value;
+        // create a post request to /mmap with the information from the form above
+
+        const data = {
+            ip: ip,
+            port: port
+        }
+        // create a post http request to /nmap with the data from the form above as a json object
+        // the response should be a string
+
+        fetch('/nmap', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(function (response) {
+            return response.text();
+        }).then(function (text) {
+            // create a new div with the class name + "_output"
+            // the div should be appended to the div with the id "output"
+            // the div should be invisible until the user clicks a button
+            // the div should have a round border and a gray background
+            var name;
+            const outputdiv = document.getElementById("outputbody");
+            const json = JSON.parse(text);
+            nameofdiv = json.ip;
+
+
+            var output = document.createElement("div");
+            output.className = nameofdiv + "_output";
+            output.style.display = "none";
+            output.style.border = "1px solid black";
+            output.style.borderRadius = "25px";
+            output.style.backgroundColor = "gray";
+            output.innerHTML = json.html;
+            outputdiv.appendChild(output);
+
+            // create a button with the class name + "_button"
+            // the button should be appended to the div with the id "output_buttons"
+            // the button should have the text "show"
+            // the button should have a round border and a gray background
+
+            var button = document.createElement("button");
+            button.setAttribute("href", "#" + nameofdiv + "_output");
+            button.className = nameofdiv + "_button";
+            button.style.border = "1px solid black";
+            button.style.borderRadius = "25px";
+            button.style.backgroundColor = "gray";
+            button.innerHTML = "show";
+            output_buttons.appendChild(button);
+
+
+
+
+
+
+
+
+        });
+    }
+
+    </script>
+{% endblock %}
