@@ -28,19 +28,36 @@ a simple GUI. The GUI is designed that it's understandable for everybody.
 
 
 <h3> Download & Installation </h3>
-<h1> <b style="color: red; margin: 0">INSTALLATION WON'T WORK THIS WAY</b> </h1>
-<p> You need to install the pip dependencies first on your own. </p>
-<p> Python Version: 3.10(min. 3.8 because of type annotations)</p>
+<h5> Instalation on Linux </h5>
+
+<p> To get started, first you will need to clone the project from github. </p>
 
 ```shell
 $ git clone https://github.com/DiscoveryFox/Charlie-s-Fourth-Angel
-$ python setup.py build
 ```
-To get started simply execute the **start.py** script.
+<p> Change into the directory.</p>
+
+````shell
+$ cd Charlie-s-Fourth-Angel
+````
+
+<p> Then install the dependencies. </p>
+
+```shell
+$ pip install -r requirements.txt
+```
+
+<p> Finally, run the application. </p>
 
 ```shell
 $ python start.py
 ```
+<hr/>
+
+Currently you have to make sure that Python 3.8 or higher is installed and can be called through `python` from the shell 
+.
+
+<hr/>
 
 If you wanna start the Website with integrated ngrok service just run it with `-n True`
 
@@ -58,4 +75,4 @@ $ python start.py -n True
 This project is licensed under the GNU GENERAL PUBLIC LICENSE
 <br>
 <br>
-<a href="flinn.eu/Charlie-s-Fourth-Angel">Project Website </a>
+<a href="about:blank">Project Website </a>
