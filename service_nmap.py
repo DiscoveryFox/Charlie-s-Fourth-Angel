@@ -1,4 +1,6 @@
 import nmap
+import dominate
+import dominate.tags
 
 feedback = list()
 
@@ -21,10 +23,8 @@ def usenmap(ip: str, port: str, json_output: bool = False):
 
     # render a html like file which contains the result prettified
 
-    for host in result['scan']:
-        for port in result['scan'][host]['tcp']:
-            if result['scan'][host]['tcp'][port]['state'] == 'open':
-                feedback.append(
-                    f'{host}:{port}/{result["scan"][host]["tcp"][port]["name"]}')
+    # create a dominate document
+    doc = dominate.tags.div()
+    # add the dpi as
 
     return feedback

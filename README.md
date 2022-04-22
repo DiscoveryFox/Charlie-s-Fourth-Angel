@@ -65,6 +65,10 @@ If you wanna start the Website with integrated ngrok service just run it with `-
 $ python start.py -n True
 ````
 
+<h3> <b> <u> Login Credentials: </u> </b> </h3>
+Email: <b> root@root.com </b> <br>
+Password: <b> root </b>
+
 <h3>Authors or Acknowledgments</h3>
 <ul>
   <li>Discovery Fox</li>
