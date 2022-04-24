@@ -292,7 +292,7 @@ def process():
 def nmap():
     # check if the request ist post or get
     if request.method == 'GET':
-        return render_template('nmap.html')
+        return render_template('nmap2.html')
     else:
         # get the ip address from the form
         data = request.data

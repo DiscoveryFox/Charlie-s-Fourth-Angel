@@ -3,14 +3,7 @@
 {% block head %}
     <!--suppress ALL -->
     <title>nmap</title>
-    <style>
-        td {
-            padding: 5px;
-            border-left: black 1px solid;
-            text-align: center;
-        }
-
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nmap.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -59,6 +52,8 @@
     </div>
 
     <script>
+    const url = location.href.split("/nmap/")[0].replace("#", "");
+    console.log(url);
 
     nmap = function () {
         const ip = document.getElementById("ip").value;
@@ -81,6 +76,15 @@
         }).then(function (response) {
             return response.text();
         }).then(function (text) {
+            // save only everything till the /nmap from the url to a varible. get the url from location.href
+            // the url should be in the form of http://localhost:5000/nmap/
+
+
+
+
+
+
+
             // create a new div with the class name + "_output"
             // the div should be appended to the div with the id "output"
             // the div should be invisible until the user clicks a button
@@ -88,16 +92,13 @@
             var name;
             const outputdiv = document.getElementById("outputbody");
             const json = JSON.parse(text);
-            nameofdiv = json.ip;
+            nameofdiv = ip;
 
 
             var output = document.createElement("div");
-            output.className = nameofdiv + "_output";
-            output.style.display = "none";
-            output.style.border = "1px solid black";
-            output.style.borderRadius = "25px";
-            output.style.backgroundColor = "gray";
-            output.innerHTML = json.html;
+            output.id = nameofdiv + "_output";
+            output.className = "overlay";
+            output.innerHTML = json.content;
             outputdiv.appendChild(output);
 
             // create a button with the class name + "_button"
@@ -106,13 +107,21 @@
             // the button should have a round border and a gray background
 
             var button = document.createElement("button");
-            button.setAttribute("href", "#" + nameofdiv + "_output");
+            // set the href of the button to the url + the name of the div
+            button.onclick = function () {
+                location.href = url + "#" + button.className.split("_button")[0].replace("#", "") + "_output";
+            }
             button.className = nameofdiv + "_button";
             button.style.border = "1px solid black";
-            button.style.borderRadius = "25px";
+            button.style.borderRadius = "10px";
             button.style.backgroundColor = "gray";
-            button.innerHTML = "show";
+            button.style.height = "80px";
+            button.style.width = "300px";
+            button.innerHTML = "Scan: " + button.className.split("_button")[0].replace("#", "") + ":" + port;
+            button.style.margin = "5px"
             output_buttons.appendChild(button);
+
+            output_buttons.appendChild(document.createElement("br"));
 
 
 
