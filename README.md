@@ -16,13 +16,12 @@ a simple GUI. The GUI is designed that it's understandable for everybody.
 
 <h3> List of features </h3>
 
-<ul>
+
   <h1> <b style="color: red; margin: 0">NOT COMPLETED</b> </h1></h1>
-  <li>4 Different DDOS/DOS Attack Tools</li> 
-  <li>2 Browser Camera Attack Scripts</li>
-  <li>6 Different Keylogger</li>
-  <li> 3 Wlan Attacks</li>
-</ul>
+  <details><summary>1 DOS Attack Tool</summary><ul><li>Slowloris</li></ul></details> 
+  <details><summary>1 Browser Camera Attack Scripts</summary><ul><li>CamPhish</li></ul></details>
+  <details><summary>1 Port Scanner (sadly no Ipv6 yet)</summary><ul><li>nmap Port Scanner</li></ul></details>
+
 
 [//]: # (todo I still need to implement these Features they are not completed. Also need to count them)
 
