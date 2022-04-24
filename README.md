@@ -20,7 +20,7 @@ a simple GUI. The GUI is designed that it's understandable for everybody.
   <h1> <b style="color: red; margin: 0">NOT COMPLETED</b> </h1></h1>
   <details><summary>1 DOS Attack Tool</summary><ul><li>Slowloris</li></ul></details> 
   <details><summary>1 Browser Camera Attack Scripts</summary><ul><li>CamPhish</li></ul></details>
-  <details><summary>1 Port Scanner (sadly no Ipv6 yet)</summary><ul><li>nmap Port Scanner</li></ul></details>
+  <details><summary>1 Port Scanner (sadly no Ipv6 yet and only working with valid ip's)</summary><ul><li>nmap Port Scanner</li></ul></details>
 
 
 [//]: # (todo I still need to implement these Features they are not completed. Also need to count them)
