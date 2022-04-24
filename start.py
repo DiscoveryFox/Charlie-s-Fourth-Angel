@@ -7,6 +7,7 @@
 @version: 1.0 Beta
 @date: 3.2.2022
 """
+import time
 from subprocess import Popen
 import psutil
 import atexit
@@ -15,6 +16,8 @@ import argparse
 from rich.console import Console
 from rich.panel import Panel
 
+import setup
+
 parser = argparse.ArgumentParser(
     description='Starts the Charlie web interface. After that, it can be reached under localhost:5000 by default.'
 )
@@ -22,6 +25,14 @@ parser = argparse.ArgumentParser(
 parser.add_argument(
     '-n',
     help='If given automatically starts the ngrok service with the Web Interface.',
+    type=str,
+    default="False"
+)
+
+parser.add_argument(
+    '-c',
+    help='If given the script will cleanup the settings and the folder structure at start. '
+         'Default is False.',
     type=str,
     default="False"
 )
@@ -36,7 +47,15 @@ if args.__dict__.get('n').lower() == 'true':
 elif args.__dict__.get('n').lower() != "false" and args.__dict__.get('n').lower() != "true":
     parser.error(f'-n must be True or False. You set it to: {args.__dict__.get("n")}')
     parser.print_help( )
-    exit(0)
+    exit(-1)
+
+if args.__dict__.get('c').lower() == 'true':
+    setup.customize_app()
+elif args.__dict__.get('c').lower() != "false" and args.__dict__.get('c').lower() != "true":
+    parser.error(f'-c must be True or False. You set it to: {args.__dict__.get("c")}')
+    parser.print_help( )
+    exit(-1)
+
 
 Popen(['python', 'app.py'])
 
@@ -53,6 +72,7 @@ def goodbye():
 
 
 while True:
+    time.sleep(0.00001)
     pass
 # todo: ^^
 # todo: Make it a try expression and a custom output when you exit the Program
