@@ -67,7 +67,6 @@ def usenmap(ip: str, port: typing.Union[str, list] = None, json_output: bool = F
     # xxx is a number between 0 and 255
     # xxx.xxx.xxx.xxx is a valid ip address
     # if ip is not valid print("Invalid IP address")
-    pprint(result)
 
     # create a regex pattern for an ipv6 address
     # and ipv6 address looks like this:
