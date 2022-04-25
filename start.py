@@ -7,6 +7,7 @@
 @version: 1.0 Beta
 @date: 3.2.2022
 """
+import os
 import time
 from subprocess import Popen
 import psutil
@@ -37,6 +38,13 @@ parser.add_argument(
     default="False"
 )
 
+parser.add_argument(
+    '-wd',
+    help='Here you can specify a special working directory. Default is the current directory.',
+    type=str,
+    default="."
+)
+
 args = parser.parse_args( )
 
 if args.__dict__.get('n').lower() == 'true':
@@ -56,6 +64,12 @@ elif args.__dict__.get('c').lower() != "false" and args.__dict__.get('c').lower(
     parser.print_help( )
     exit(-1)
 
+if args.__dict__.get('wd') != ".":
+    wd = args.__dict__.get('wd')
+    if not args.__dict__.get('wd').endswith('/'): wd += '/'
+    os.chdir(wd)
+elif args.__dict__.get('wd') == ".":
+    os.chdir(os.getcwd())
 
 Popen(['python', 'app.py'])
 
