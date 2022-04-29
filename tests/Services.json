@@ -7,7 +7,7 @@
     "path_on_server" : "/slowloris",
     "supported_OS" : ["Windows", "Darwin", "Linux", "Java"],
     "version" : 1.0,
-    "installed" : false
+    "installed" : true
   },
   "camphish" : {
     "title" : "CamPhish",
