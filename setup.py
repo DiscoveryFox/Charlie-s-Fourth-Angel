@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import os
 from shlex import quote as shlex_quote
 
@@ -29,7 +30,7 @@ def clone_repo():
 def make_executables():
     to_make = ['app.py', 'get_ip.sh', 'startcam.sh', 'start.py', 'tool_installer.py']
     for file in to_make:
-        os.system(f'chmod +x {cwd + /Charlie-s-Fourth-Angel/ + file}')
+        os.system(f'chmod +x {cwd + "/Charlie-s-Fourth-Angel/" + file}')
 
 
 # install the requirements through pip
