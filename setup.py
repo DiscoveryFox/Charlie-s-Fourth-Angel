@@ -3,16 +3,22 @@ import os
 from shlex import quote as shlex_quote
 
 # get path of the current directory
-cwd = os.getcwd( )
+cwd = os.getcwd()
 
 
-def customize_app():
+def customize_app(from_source=False):
     # open the app.cfg file and set ServicePath to cwd + /Services.json
-    with open(cwd + '/app.cfg', 'r') as f:
-        lines = f.readlines( )
-        for i, line in enumerate(lines):
-            if 'ServicesPath' in line:
-                lines[i] = 'ServicesPath = ' + shlex_quote(cwd + '/Services.json') + '\r\n'
+    with open(cwd + "/Charlie-s-Fourth-Angel/" + '/app.cfg', 'r') as f:
+        lines = f.readlines()
+        if from_source:
+            for i, line in enumerate(lines):
+                if 'ServicesPath' in line:
+                    lines[i] = 'ServicesPath = ' + shlex_quote(cwd + '/Services.json') + '\r\n'
+        else:
+            for i, line in enumerate(lines):
+                if 'ServicesPath' in line:
+                    lines[i] = 'ServicesPath = ' + shlex_quote(cwd + "/Charlie-s-Fourth-Angel/" +
+                                                               '/Services.json') + '\r\n'
 
     # write the new app.cfg file
     with open(cwd + '/app.cfg', 'w') as f:
@@ -38,8 +44,8 @@ def make_executables():
 
 if __name__ == '__main__':
     # clone the repo
-    clone_repo( )
+    clone_repo()
     # customize the app.cfg file
-    customize_app( )
+    customize_app()
     # make the executables
-    make_executables( )
+    make_executables()

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3.10
 """
 @author: Discovery Fox
 @contact: Flinn@Fuxxbau.de
