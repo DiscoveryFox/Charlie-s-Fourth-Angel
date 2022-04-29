@@ -1,0 +1,10 @@
+Flask
+psutil
+pyngrok
+rich
+requests
+pip
+Werkzeug
+Frozen-Flask
+python-nmap
+dominate

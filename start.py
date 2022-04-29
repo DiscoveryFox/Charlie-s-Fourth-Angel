@@ -71,13 +71,13 @@ if args.__dict__.get('wd') != ".":
 elif args.__dict__.get('wd') == ".":
     os.chdir(os.getcwd())
 
-Popen(['python', 'app.py'])
+Popen(['python3.10', 'app.py'])
 
 
 @atexit.register
 def goodbye():
     for process in psutil.process_iter( ):
-        if process.cmdline( ) == ['python', 'app.py']:
+        if process.cmdline( ) == ['python3.10', 'app.py']:
             print('Process found. Terminating it.')
             process.terminate( )
             break

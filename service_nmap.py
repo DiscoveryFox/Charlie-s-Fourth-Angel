@@ -7,6 +7,7 @@ import dominate.tags
 import socket
 
 import typing  # todo: remove this with typing.Union() and replace it with the |(pipe) operator.
+# todo: tqdm for loading bars
 
 feedback = list()
 
@@ -28,7 +29,7 @@ def get_ip(ip):
 
 
 # noinspection PyGlobalUndefined
-def usenmap(ip: str, port: typing.Union[str, list] = None, json_output: bool = False):
+def usenmap(ip: str, port: str | list = None, json_output: bool = False):
     """
     :param ip: ip address
     :param port: port number
