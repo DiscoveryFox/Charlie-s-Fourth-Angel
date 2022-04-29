@@ -3,7 +3,7 @@ import configparser
 import json
 
 config = configparser.ConfigParser()
-config.read('/home/kali/Documents/Charlie-s-Fourth-Angel/app.cfg')
+config.read('../app.cfg')
 
 app = flask.Flask(__name__)
 
