@@ -308,7 +308,11 @@ def nmap():
         return nmap_output
 
 
-
+@app.route('/install/<string:project_to_download>')
+@login_required
+def install(project_to_download):
+    tool_installer.install(project_to_download)
+    return redirect('/', )
 
 
 if __name__ == '__main__':

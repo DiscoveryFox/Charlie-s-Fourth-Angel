@@ -6,6 +6,8 @@ from shlex import quote as shlex_quote
 cwd = os.getcwd()
 
 
+# TODO: change '/home/kali/Documents/' to a variable which works atleast across linux
+
 def customize_app():
     # open the app.cfg file and set ServicePath to cwd + /Services.json
     if os.getcwd().split("/")[-1] == "Charlie-s-Fourth-Angel":
@@ -15,21 +17,23 @@ def customize_app():
             for i, line in enumerate(lines):
                 if 'ServicesPath' in line:
                     lines[i] = 'ServicesPath = ' + shlex_quote(cwd + '/Services.json') + '\r\n'
+
+        with open(cwd + '/app.cfg', 'w') as f:
+            f.writelines(lines)
+
     else:
-        with open(cwd + 'Charlie-s-Fourth-Angel' + '/app.cfg', 'r') as f:
+        with open('/home/kali/Documents/' + 'Charlie-s-Fourth-Angel' + '/app.cfg', 'r') as f:
             lines = f.readlines()
             for i, line in enumerate(lines):
                 if 'ServicesPath' in line:
-                    lines[i] = 'ServicesPath = ' + shlex_quote(cwd + "/Charlie-s-Fourth-Angel/" +
-                                                               '/Services.json') + '\r\n'
+                    lines[i] = 'ServicesPath = ' + shlex_quote(
+                        '/home/kali/Documents/' + "/Charlie-s-Fourth-Angel/" +
+                        '/Services.json') + '\r\n'
 
-    # write the new app.cfg file
-    if cwd.endswith("/"):
-        with open(cwd + 'app.cfg', 'w') as f:
+        with open('/home/kali/Documents/'+ 'Charlie-s-Fourth-Angel' + '/app.cfg', 'w') as f:
             f.writelines(lines)
-    else:
-        with open(cwd + '/app.cfg', 'w') as f:
-            f.writelines(lines)
+
+
 
 
 # clone a repository to the current directory from github
