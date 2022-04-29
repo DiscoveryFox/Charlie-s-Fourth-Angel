@@ -71,7 +71,7 @@ if args.__dict__.get('wd') != ".":
 elif args.__dict__.get('wd') == ".":
     os.chdir(os.getcwd())
 
-Popen(['python3.10', 'app.py'])
+Popen(['python3.10', f'{os.getcwd()}/app.py'])
 
 
 @atexit.register

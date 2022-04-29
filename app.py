@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import os
 import platform
 import time
 import configparser
@@ -157,7 +158,7 @@ def register():
 @app.route('/')
 @login_required
 def index():
-    services = json.loads(open(config['PATHS']['ServicesPath'], "r").read())
+    services = json.loads(open(f"{config['PATHS']['ServicesPath']}", "r").read())
     return render_template('index.html', services=services)
 
 
@@ -305,6 +306,9 @@ def nmap():
         nmap_output = service_nmap.usenmap(ip, port)
         # return the result
         return nmap_output
+
+
+
 
 
 if __name__ == '__main__':
