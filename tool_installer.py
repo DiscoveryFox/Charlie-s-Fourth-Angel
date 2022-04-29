@@ -3,6 +3,7 @@ import json
 import pip
 import configparser
 from pprint import pprint
+import ast
 
 import requests
 
@@ -22,9 +23,8 @@ def prime_install(pipname: str = None, gitlink: str = None):
 
 
 def get_service(name: str) -> dict:
-    print(name)
-    services = json.loads(requests.get(config['PATHS']['OnlineServices']).text)
-
+    services = requests.get(config['PATHS']['OnlineServices']).text
+    services = json.loads(services)
     if name in services:
         return {'success': 1,
                 'response': services[name]
@@ -40,10 +40,9 @@ def install(name):
     match service['success']:
         case 1:
             with open(config['PATHS']['ServicesPath'], "r") as file:
-                print(file.read())
-                if name in json.loads(file.read()):
-                    print(file.read())
-                    content = json.loads(file.read())
+                filecontent = json.loads(file.read())
+                if name in filecontent:
+                    content = filecontent
                     del content[name]
                     content_found = True
                 else:
@@ -56,11 +55,11 @@ def install(name):
                     file.truncate()
                     file.writelines(lines)
                 else:
+                    content[name] = service['response']
+                    pprint(content)
                     file.truncate()
-                    file.write(json.dumps(content))
+                    file.write(json.dumps(content, indent=2))
         case 0:
             print('Service not found in this database.')
         case _:
             raise Exception
-
-
