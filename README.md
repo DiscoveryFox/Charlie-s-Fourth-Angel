@@ -14,7 +14,7 @@ a simple GUI. The GUI is designed that it's understandable for everybody. In tot
 you can check how many lines are in the project by just executing the following command: <br>
 
 ```shell
-( find ./ -name '*.pl' -print0 | xargs -0 cat ) | wc -l
+( find ./ -name '*' -print0 | xargs -0 cat ) | wc -l
 ```
 
 </p>
