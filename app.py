@@ -186,7 +186,7 @@ def settings():
 def account():
     # create a list with all users from the datanbase
     users = User.query.all()
-    return render_template('account.html', users=users)
+    return render_template('account.html', users=users, current_user=current_user)
 
 
 @app.route('/security')
@@ -205,6 +205,7 @@ def camphish_create() -> str:
         template = request.form.get('template')
         auth = "test"
         # ngrok_url = camphish.camphish(int(service), int(template), autthoken=auth)
+        # noinspection PyGlobalUndefined
         global ngrok_url_thread
         ngrok_url_thread = camphish.custom_thread(target=camphish.camphish,
                                                   args=(int(template), auth),
