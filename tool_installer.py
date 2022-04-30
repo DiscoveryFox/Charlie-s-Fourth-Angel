@@ -44,6 +44,18 @@ def add_blueprint(service_dir: str, name:str) -> str:
     with open(f'blueprints/{name}_blueprint_test.py', 'w') as file:
         file.write(blueprint_content)
 
+    # insert the blueprint in the app.py file
+    with open('app.py', 'r') as file:
+        lines = file.readlines()
+    for x in range(3):
+        del lines[-1]
+    lines.append(f'from blueprints.{name}_blueprint import {name}_blueprint\n')
+    lines.append(f'app.register_blueprint({name}_blueprint, url_prefix="/{name}")\n')
+    lines.append(f'if __name__ == "__main__":\n')
+    lines.append(f'    app.run(host="0.0.0.0", debug=True)\n')
+    with open('app.py', 'w') as file:
+        file.writelines(lines)
+
     return "blueprint"
 
 
