@@ -35,13 +35,13 @@ def get_service(name: str) -> dict:
                 }
 
 
-def add_blueprint(service_dir: str, name:str) -> str:
+def add_blueprint(service_dir: str, name: str) -> str:
     # noinspection PyTypeChecker
     blueprint_content = requests.get(service_dir['path_to_blueprint']).text
     # create a new file with the name of the service + _blueprint.py and write the
     # blueprint_content in it
 
-    with open(f'blueprints/{name}_blueprint_test.py', 'w') as file:
+    with open(f'blueprints/{name}_blueprint.py', 'w') as file:
         file.write(blueprint_content)
 
     # insert the blueprint in the app.py file
