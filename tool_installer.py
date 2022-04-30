@@ -35,6 +35,18 @@ def get_service(name: str) -> dict:
                 }
 
 
+def add_blueprint(service_dir: str, name:str) -> str:
+    # noinspection PyTypeChecker
+    blueprint_content = requests.get(service_dir['path_to_blueprint']).text
+    # create a new file with the name of the service + _blueprint.py and write the
+    # blueprint_content in it
+
+    with open(f'blueprints/{name}_blueprint_test.py', 'w') as file:
+        file.write(blueprint_content)
+
+    return "blueprint"
+
+
 def install(name):
     service = get_service(name)
     match service['success']:
@@ -56,7 +68,7 @@ def install(name):
                     file.writelines(lines)
                 else:
                     content[name] = service['response']
-                    pprint(content)
+                    add_blueprint(content[name], name)
                     file.truncate()
                     file.write(json.dumps(content, indent=2))
         case 0:
