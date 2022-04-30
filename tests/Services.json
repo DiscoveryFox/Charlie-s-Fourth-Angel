@@ -1,25 +1,18 @@
 {
-  "slowloris": {
-    "title" : "Slowloris",
-    "description" : "Slowloris is a DDOS Tool",
-    "path_to_details": "https://raw.githubusercontent.com/DiscoveryFox/Charlie-s-Fourth-Angel/master/slowloris_test.html",
-    "path_to_git" : "https://github.com/gkbrk/slowloris",
-    "path_on_server" : "/slowloris",
-    "supported_OS" : ["Windows", "Darwin", "Linux", "Java"],
-    "version" : 1.0,
-    "installed" : true
-  },
-  "camphish" : {
-    "title" : "CamPhish",
-    "description" : "CamPhish is used to hijack the Camera of Devices",
+  "camphish": {
+    "title": "CamPhish",
+    "description": "CamPhish is used to hijack the Camera of Devices",
     "path_to_details": "https://raw.githubusercontent.com/DiscoveryFox/Charlie-s-Fourth-Angel/master/test.html",
-    "path_to_git" : "https://github.com/DiscoveryFox/CamPhish",
-    "path_on_server" : "/camphish",
-    "supported_OS" : ["Linux"],
-    "version" : 1.5,
-    "installed" : true
+    "path_to_git": "https://github.com/DiscoveryFox/CamPhish",
+    "path_on_server": "/camphish",
+    "supported_OS": [
+      "Linux"
+    ],
+    "version": 1.5,
+    "installed": true,
+    "path_to_blueprint": "https://raw.githubusercontent.com/DiscoveryFox/Charlie-s-Fourth-Angel/master/blueprints/camphish_blueprint.py"
   },
-  "nmap" : {
+  "nmap": {
     "title": "Nmap",
     "description": "Nmap is a Network Mapper",
     "path_to_details": "https://raw.githubusercontent.com/DiscoveryFox/Charlie-s-Fourth-Angel/master/nmap_details.html",
@@ -32,6 +25,23 @@
       "Java"
     ],
     "version": 1.0,
-    "installed": true
+    "installed": true,
+    "path_to_blueprint": "https://raw.githubusercontent.com/DiscoveryFox/Charlie-s-Fourth-Angel/master/blueprints/nmap_blueprint.py"
+  },
+  "slowloris": {
+    "description": "Slowloris is a DDOS Tool",
+    "installed": true,
+    "path_on_server": "/slowloris",
+    "path_to_details": "https://raw.githubusercontent.com/DiscoveryFox/Charlie-s-Fourth-Angel/master/slowloris_test.html",
+    "path_to_git": "https://github.com/gkbrk/slowloris",
+    "supported_OS": [
+      "Windows",
+      "Darwin",
+      "Linux",
+      "Java"
+    ],
+    "title": "Slowloris",
+    "version": 1.0,
+    "path_to_blueprint": "https://raw.githubusercontent.com/DiscoveryFox/Charlie-s-Fourth-Angel/master/blueprints/slowloris_blueprint.py"
   }
 }

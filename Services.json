@@ -9,7 +9,8 @@
       "Linux"
     ],
     "version": 1.5,
-    "installed": true
+    "installed": true,
+    "path_to_blueprint": "https://raw.githubusercontent.com/DiscoveryFox/Charlie-s-Fourth-Angel/master/blueprints/camphish_blueprint.py"
   },
   "nmap": {
     "title": "Nmap",
@@ -24,7 +25,8 @@
       "Java"
     ],
     "version": 1.0,
-    "installed": true
+    "installed": true,
+    "path_to_blueprint": "https://raw.githubusercontent.com/DiscoveryFox/Charlie-s-Fourth-Angel/master/blueprints/nmap_blueprint.py"
   },
   "slowloris": {
     "description": "Slowloris is a DDOS Tool",
@@ -39,6 +41,7 @@
       "Java"
     ],
     "title": "Slowloris",
-    "version": 1.0
+    "version": 1.0,
+    "path_to_blueprint": "https://raw.githubusercontent.com/DiscoveryFox/Charlie-s-Fourth-Angel/master/blueprints/slowloris_blueprint.py"
   }
 }
