@@ -158,7 +158,10 @@ def register():
 @app.route('/')
 @login_required
 def index():
-    services = json.loads(open(f"{config['PATHS']['ServicesPath']}", "r").read())
+    try:
+        services = json.loads(open(f"{config['PATHS']['ServicesPath']}", "r").read())
+    except json.decoder.JSONDecodeError:
+        print("Error loading services.json. Please check if it exists and is valid JSON")
     return render_template('index.html', services=services)
 
 
