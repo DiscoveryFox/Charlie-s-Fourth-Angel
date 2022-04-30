@@ -7,3 +7,4 @@ dist/
 .vscode/
 .vscode-test/
 build/
+blueprints/
