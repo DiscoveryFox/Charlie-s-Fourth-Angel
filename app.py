@@ -159,10 +159,10 @@ def register():
 @login_required
 def index():
     try:
-        services = json.loads(open(f"{config['PATHS']['ServicesPath']}", "r").read())
+        services = json.loads(open(f"{config['PATHS']['ServicesPath']}").read())
+        return render_template('index.html', services=services)
     except json.decoder.JSONDecodeError:
         print("Error loading services.json. Please check if it exists and is valid JSON")
-    return render_template('index.html', services=services)
 
 
 @app.route("/my_machine", methods=["GET", "POST"])
@@ -317,6 +317,15 @@ def nmap():
 def install(project_to_download):
     tool_installer.install(project_to_download)
     return redirect('/')
+
+
+@app.route('/<string:project_to_open>')
+@login_required
+def open_service(project_to_open):
+    if tool_installer.check_if_service_installed(project_to_open):
+        return render_template(f'/services/{project_to_open}.html')
+    else:
+        return redirect('/')
 
 
 if __name__ == '__main__':
