@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/default.css') }}">
+    <link href="https://raw.githubusercontent.com/DiscoveryFox/Charlie-s-Fourth-Angel/master/favicon_light.png"
+          rel="icon">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='../favicon.ico') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $SCRIPT_ROOT = {{ request.script_root|tojson }};
+    </script>
+    {% block head %}{% endblock %}
+</head>
+<body theme="dark">
+<script>
+    var init = function (){
+        // get page url
+        var url = window.location.href;
+        // get page name
+        var page = url.substring(url.lastIndexOf('/') + 1);
+        // remove .html
+        page = page.replace('.html', '');
+        if (page === '') {
+            page = 'index';
+        }
+        switch(page) {
+            case 'index':
+                var sidebar = "<div class='sidebar' id='sidebar'> <a href='/' class='active id='index'>Tools</a> <a href='/my_machine' id='my_machine'>My Machine</a><a href='/security' id='security'>Security</a><a href='/settings' id='settings'>Settings</a><a href='/account' id='account'>Account</a>";
+                break;
+            case 'my_machine':
+                var sidebar = "<div class='sidebar' id='sidebar'> <a href='/' id='index'>Tools</a> <a href='/my_machine' class='active id='my_machine'>My Machine</a><a href='/security' id='security'>Security</a><a href='/settings' id='settings'>Settings</a><a href='/account' id='account'>Account</a>";
+                break;
+            case 'security':
+                var sidebar = "<div class='sidebar' id='sidebar'> <a href='/' id='index'>Tools</a> <a href='/my_machine' id='my_machine'>My Machine</a><a href='/security' class='active id='security'>Security</a><a href='/settings' id='settings'>Settings</a><a href='/account' id='account'>Account</a>";
+                break;
+            case 'settings':
+                var sidebar = "<div class='sidebar' id='sidebar'> <a href='/' id='index'>Tools</a> <a href='/my_machine' id='my_machine'>My Machine</a><a href='/security' id='security'>Security</a><a href='/settings' class='active id='settings'>Settings</a><a href='/account' id='account'>Account</a>";
+                break;
+            case 'account':
+                var sidebar = "<div class='sidebar' id='sidebar'> <a href='/' id='index'>Tools</a> <a href='/my_machine' id='my_machine'>My Machine</a><a href='/security' id='security'>Security</a><a href='/settings' id='settings'>Settings</a><a href='/account' class='active id='account'>Account</a>";
+                break;
+            default:
+                var sidebar = "<div class='sidebar' id='sidebar'> <a href='/' class='active id='index'>Tools</a> <a href='/my_machine' id='my_machine'>My Machine</a><a href='/security' id='security'>Security</a><a href='/settings' id='settings'>Settings</a><a href='/account' id='account'>Account</a>";
+        }
+        body = document.getElementsByTagName('body')[0];
+        body.innerHTML = sidebar + body.innerHTML;
+    }
+    init();
+
+</script>
+
+        <nav class="navbar navbar-light" style="z-index: 0; position: sticky; top: 0px">
+            <div class="container" style="margin-right: 200px;
+    width: 200px;">
+                <!--  ↑ ↑ ↑ Das Logo  ↑ ↑ ↑ -->
+                <form class="form-inline">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input switchSlider" id="switchToDark">
+                        <!--  ↑ ↑ ↑ Das ist unsere Switch Slider, die uns später die Dark Mode implementiert  ↑ ↑ ↑ -->
+                        <label class="custom-control-label" for="switchToDark"><span id="spanChange">Light Mode</span></label>
+                    </div>
+                </form>
+            </div>
+        </nav>
+        <div class="flex">
+                <a class="logo navbar-brand"><img id="logo_img" src="https://raw.githubusercontent.com/DiscoveryFox/Charlie-s-Fourth-Angel/master/favicon_dark.png" title="Charle's Fourth Angel Logo"/></a>
+        </div>
+        <div class="page_content">
+            {% block body %}{% endblock %}
+        </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
+
+</body>
+
+<script src="{{ url_for('static', filename='js/switch.js') }}"></script>
+</html>
+
+<!-- <div class="sidebar" id="sidebar">
+            <a href="/" class="active" id="index">Tools</a>
+            <a href="/my_machine" id="my_machine">My Machine</a>
+            <a href="/security" id="security">Security</a>
+            <a href="/settings" id="settings">Settings</a>
+            <a href="/account" id="account">Account</a>
+        </div> -->
