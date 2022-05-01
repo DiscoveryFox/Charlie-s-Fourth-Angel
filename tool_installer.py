@@ -87,3 +87,13 @@ def install(name):
             print('Service not found in this database.')
         case _:
             raise Exception
+
+
+def check_if_service_installed(project_to_open):
+    with open(config['PATHS']['ServicesPath'], "r") as file:
+        filecontent = json.loads(file.read())
+        if project_to_open in filecontent and filecontent[project_to_open]['installed'] is not \
+                False:
+            return True
+        else:
+            return False
