@@ -1,16 +1,18 @@
 #!/usr/bin/python
 import os
 import platform
+import importlib
 import time
 import configparser
 from functools import wraps
-from flask import Flask, render_template, request, redirect, jsonify, url_for, flash, g
+from flask import Flask, render_template, request, redirect, jsonify, url_for, flash, g, \
+    send_from_directory
 from flask_login import UserMixin, login_required, current_user, login_user, LoginManager, \
     logout_user
 from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Resource, Api, abort, reqparse
 from datetime import datetime, timezone
-
+import pprint
 from werkzeug.security import generate_password_hash, check_password_hash
 
 import camphish
@@ -163,6 +165,10 @@ def index():
         return render_template('index.html', services=services)
     except json.decoder.JSONDecodeError:
         print("Error loading services.json. Please check if it exists and is valid JSON")
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
 @app.route("/my_machine", methods=["GET", "POST"])
@@ -319,11 +325,18 @@ def install(project_to_download):
     return redirect('/')
 
 
-@app.route('/<string:project_to_open>')
+# noinspection PyUnresolvedReferences
+@app.route('/<string:project_to_open>/')
 @login_required
 def open_service(project_to_open):
     if tool_installer.check_if_service_installed(project_to_open):
-        return render_template(f'/services/{project_to_open}.html')
+        module = importlib.import_module(f'blueprints.{project_to_open}')
+        required_variables = module.required_variables()
+        variables = list()
+        for variable in required_variables:
+            variables.append(globals()[variable])
+        module.run_code(variables)
+        return render_template(f'/services/{project_to_open}.html', variables=variables)
     else:
         return redirect('/')
 
