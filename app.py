@@ -331,12 +331,11 @@ def install(project_to_download):
 def open_service(project_to_open):
     if tool_installer.check_if_service_installed(project_to_open):
         module = importlib.import_module(f'blueprints.{project_to_open}')
-        required_variables = module.required_variables()
+        required_variables = module.required_variables()['wanted']
         variables = list()
         for variable in required_variables:
             variables.append(globals()[variable])
-        module.run_code(variables)
-        return render_template(f'/services/{project_to_open}.html', variables=variables)
+        return module.run_code(variables)
     else:
         return redirect('/')
 
