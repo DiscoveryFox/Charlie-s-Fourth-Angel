@@ -49,12 +49,12 @@ def add_blueprint(service_dir: str, name: str) -> str:
         lines = file.readlines()
     for x in range(3):
         del lines[-1]
-    lines.append(f'from blueprints.{name}_blueprint import {name}_blueprint\n')
-    lines.append(f'app.register_blueprint({name}_blueprint, url_prefix="/{name}")\n')
-    lines.append(f'if __name__ == "__main__":\n')
-    lines.append(f'    app.run(host="0.0.0.0", debug=True)\n')
-    with open('app.py', 'w') as file:
-        file.writelines(lines)
+    ###lines.append(f'from blueprints.{name}_blueprint import {name}_blueprint\n')
+    ###lines.append(f'app.register_blueprint({name}_blueprint, url_prefix="/{name}")\n')
+    ###lines.append(f'if __name__ == "__main__":\n')
+    ###lines.append(f'    app.run(host="0.0.0.0", debug=True)\n')
+    ###with open('app.py', 'w') as file:
+    ###    file.writelines(lines)
 
     return "blueprint"
 
@@ -92,8 +92,9 @@ def install(name):
 def check_if_service_installed(project_to_open):
     with open(config['PATHS']['ServicesPath'], "r") as file:
         filecontent = json.loads(file.read())
-        if project_to_open in filecontent and filecontent[project_to_open]['installed'] is not \
-                False:
+        print(project_to_open)
+        print(filecontent[project_to_open]['installed'])
+        if filecontent[project_to_open]['installed'] is not False:
             return True
         else:
             return False
