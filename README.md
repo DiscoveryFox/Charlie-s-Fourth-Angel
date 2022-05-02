@@ -8,7 +8,7 @@ title="Charle's Fourth Angel Logo"/></p>
 <hr/>
 
 <p>A website that allows the user to use many common hacking scripts, normally only executable in the terminal, based on
-a simple GUI. The GUI is designed that it's understandable for everybody. In total I wrote 5088 Lines already.
+a simple GUI. The GUI is designed that it's understandable for everybody. In total I wrote 5450 Lines already.
 <br>
 <br>
 you can check how many lines are in the project by just executing the following command: <br>
