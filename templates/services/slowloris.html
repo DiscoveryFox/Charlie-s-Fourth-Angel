@@ -5,6 +5,61 @@
 
 {% block body %}
 <h2>Slowloris</h2>
-    <p>{{ current_user.name }}</p>
-    <p>{{ API }}</p>
+<p>
+    Slowloris is a tool that is used to send a series of requests to a target
+    server. It is used to test the target server's response time.
+</p>
+<p>
+    The target server must be able to handle the requests. If the target server can't handle the requests, the target
+    server will be down.
+</p>
+<p>
+    In our case, we use this functionality to shot down target webservers with low bandwidth usage!
+</p>
+
+<div>
+    <input type="text" id="ip_input" placeholder="ip address (sadly no ipv6 or URL's yet)">
+
+    <input type="text" id="port_input" placeholder="port number">
+    <button id="nmap" onclick="slowloris()">Slowloris</button>
+</div>
+<div>
+Running Attacks:
+
+<ul id="running_attacks">
+
+
+</ul>
+</div>
+    <script>
+    slowloris = function() {
+        var ip = document.getElementById('ip_input').value;
+        var port = document.getElementById('port_input').value;
+        var url = window.location.href + 'start/' + ip + '/' + port;
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.send();
+        var attack_list = document.getElementById('running_attacks')
+        var attack_item = document.createElement('li');
+        attack_item.id = ip + ':' + port;
+        var url = window.location.href + 'stop/' + ip + '/' + port;
+        attack_item.innerHTML = '<a>' + ip + ':' + port + '</a>';
+        attack_list.appendChild(attack_item);
+        attack_item.addEventListener('click', function(){
+            console.log('stop slowloris');
+            console.log(ip)
+            console.log(port)
+            var url = window.location.href + 'stop/' + ip + '/' + port;
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.send();
+            attack_list = document.getElementById('running_attacks')
+            attack_item = document.getElementById(ip + ':' + port);
+            attack_list.removeChild(attack_item);
+        });
+    }
+
+
+
+    </script>
 {% endblock %}
