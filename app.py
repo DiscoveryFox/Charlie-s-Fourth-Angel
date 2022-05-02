@@ -134,6 +134,7 @@ def logout():
     return redirect("/")
 
 
+# noinspection PyArgumentList
 @app.route("/register", methods=["GET", "POST"])
 @login_required
 def register():
@@ -166,9 +167,11 @@ def index():
     except json.decoder.JSONDecodeError:
         print("Error loading services.json. Please check if it exists and is valid JSON")
 
+
 @app.route('/favicon.ico')
 def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico',
+                               mimetype='image/vnd.microsoft.icon')
 
 
 @app.route("/my_machine", methods=["GET", "POST"])
@@ -326,6 +329,7 @@ def install(project_to_download):
 
 
 # noinspection PyUnresolvedReferences
+
 @app.route('/<string:project_to_open>/')
 @login_required
 def open_service(project_to_open):
@@ -342,4 +346,4 @@ def open_service(project_to_open):
 
 if __name__ == '__main__':
     # noinspection FlaskDebugMode
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', use_evalex=False)
