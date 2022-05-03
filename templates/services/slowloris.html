@@ -33,6 +33,8 @@ Running Attacks:
 </ul>
 </div>
     <script>
+    let attacks = [];
+
     slowloris = function() {
         const ip = document.getElementById('ip_input').value;
         const port = document.getElementById('port_input').value;
@@ -45,8 +47,9 @@ Running Attacks:
         let attack_list = document.getElementById('running_attacks');
         let attack_item = document.createElement('li');
         attack_item.id = ip + ':' + port;
-        attack_item.innerHTML = '<a>' + ip + ':' + port + '</a>';
+        attack_item.innerHTML = ip + ':' + port;
         attack_list.appendChild(attack_item);
+        attacks.push([ip + ':' + port]);
         attack_item.addEventListener('click', function(){
             console.log('stop slowloris');
             console.log(ip)
@@ -108,6 +111,22 @@ Running Attacks:
     setInterval(function(){
         document.getElementById('slowloris_btn').disabled = !(update_border_ip() === 1 && update_border_port() === 1);
     }, 10);
+
+    function stop_attack(ip_port_tupel) {
+        const ip = ip_port_tupel[0];
+        const port = ip_port_tupel[1];
+        localStorage.setItem(i, (ip + ':' + port));
+        const url = window.location.href + 'stop/' + ip + '/' + port;
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.send();
+    }
+
+    window.onbeforeunload = function (){
+        attacks.forEach(function(attack){
+            stop_attack(attack);
+        });
+    }
 
     </script>
 {% endblock %}
