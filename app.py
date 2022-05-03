@@ -22,7 +22,6 @@ import json
 import service_nmap
 import tool_installer
 import requests
-from secrets import compare_digest
 import machine_stats
 
 app = Flask(__name__)
@@ -76,7 +75,7 @@ def token_required(f):
         
                 return f(current_user, *args, **kwargs)
                 
-                """
+        """
 
     return decorated
 
