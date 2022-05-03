@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
+    <link rel="stylesheet" href="{{url_for('static', filename='blueprints/css/slowloris.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -21,7 +22,7 @@
     <input type="text" id="ip_input" placeholder="ip address (sadly no ipv6 or URL's yet)">
 
     <input type="text" id="port_input" placeholder="port number">
-    <button id="nmap" onclick="slowloris()">Slowloris</button>
+    <button id="slowloris_btn" onclick="slowloris()" disabled>Slowloris</button>
 </div>
 <div>
 Running Attacks:
@@ -33,30 +34,80 @@ Running Attacks:
 </div>
     <script>
     slowloris = function() {
-        var ip = document.getElementById('ip_input').value;
-        var port = document.getElementById('port_input').value;
-        var url = window.location.href + 'start/' + ip + '/' + port;
-        var xhr = new XMLHttpRequest();
+        const ip = document.getElementById('ip_input').value;
+        const port = document.getElementById('port_input').value;
+        document.getElementById('ip_input').value = '';
+        document.getElementById('port_input').value = '';
+        const url = window.location.href + 'start/' + ip + '/' + port;
+        const xhr = new XMLHttpRequest();
         xhr.open('GET', url, true);
         xhr.send();
-        var attack_list = document.getElementById('running_attacks')
-        var attack_item = document.createElement('li');
+        let attack_list = document.getElementById('running_attacks');
+        let attack_item = document.createElement('li');
         attack_item.id = ip + ':' + port;
-        var url = window.location.href + 'stop/' + ip + '/' + port;
         attack_item.innerHTML = '<a>' + ip + ':' + port + '</a>';
         attack_list.appendChild(attack_item);
         attack_item.addEventListener('click', function(){
             console.log('stop slowloris');
             console.log(ip)
             console.log(port)
-            var url = window.location.href + 'stop/' + ip + '/' + port;
-            var xhr = new XMLHttpRequest();
+            const url = window.location.href + 'stop/' + ip + '/' + port;
+            const xhr = new XMLHttpRequest();
             xhr.open('GET', url, true);
             xhr.send();
             attack_list = document.getElementById('running_attacks')
             attack_item = document.getElementById(ip + ':' + port);
+            attack_item.className = 'stopped';
             attack_list.removeChild(attack_item);
         });
     }
+
+    document.getElementById('ip_input').addEventListener('input', function () {
+        update_border_ip();
+    });
+
+    update_border_ip = function(){
+            var ip = document.getElementById('ip_input').value;
+            // check if ip is valid
+            if(ip.match(/^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/)){
+                document.getElementById('ip_input').style.borderColor = 'green';
+                document.getElementById('ip_input').style.backgroundColor = 'white';
+                return 1
+            }
+            else if ((ip.match(/(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))/))){
+                document.getElementById('ip_input').style.borderColor = 'green';
+                document.getElementById('ip_input').style.backgroundColor = 'white';
+                return 1
+            }
+            else {
+                document.getElementById('ip_input').style.borderColor = 'red';
+                document.getElementById('ip_input').style.backgroundColor = 'white';
+                return 0
+            }
+        }
+
+        document.getElementById('port_input').addEventListener('input', function () {
+            update_border_port();
+        });
+
+        update_border_port = function () {
+        var port = document.getElementById('port_input').value;
+        if (port.match(/^[0-9]{1,5}$/)) {
+            document.getElementById('port_input').style.borderColor = 'green';
+            document.getElementById('port_input').style.backgroundColor = 'white';
+            return 1
+        }
+        else {
+            document.getElementById('port_input').style.borderColor = 'red';
+            document.getElementById('port_input').style.backgroundColor = 'white';
+            return 0
+        }
+
+    }
+
+    setInterval(function(){
+        document.getElementById('slowloris_btn').disabled = !(update_border_ip() === 1 && update_border_port() === 1);
+    }, 10);
+
     </script>
 {% endblock %}
