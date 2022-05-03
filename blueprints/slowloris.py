@@ -27,6 +27,15 @@ def stop_slowloris(ip, port):
             return flask.redirect('/slowloris/')
     return '1'  # flask.redirect('/slowloris/')
 
+def stop_all_slowloris():
+    """
+    This function stops all slowloris processes.
+    :return:
+    """
+    for x in process:
+        x['popen'].terminate()
+        process.remove(x)
+    return 200
 
 # noinspection PyGlobalUndefined
 def start_slowloris(ip, port):
@@ -108,6 +117,9 @@ def run_code(*args):
         {'endpoint': '/slowloris/start/<string:ip>/<string:port>', 'method': ['GET'],
          'view_function':
              start_slowloris,
+         'login_required': True},
+        {'endpoint': '/slowloris/stopall/', 'method': ['GET'],
+         'view_function': stop_all_slowloris,
          'login_required': True}
     ])
 
