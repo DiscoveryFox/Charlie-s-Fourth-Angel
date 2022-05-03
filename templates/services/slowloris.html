@@ -116,16 +116,21 @@ Running Attacks:
         const ip = ip_port_tupel[0];
         const port = ip_port_tupel[1];
         localStorage.setItem(i, (ip + ':' + port));
-        const url = window.location.href + 'stop/' + ip + '/' + port;
+        // get base url
+        var base_url = window.location.href.split('/');
+        base_url = base_url[0] + '//' + base_url[2];
+
+        const url = base_url + '/slowloris/' + 'stopall/';
         const xhr = new XMLHttpRequest();
         xhr.open('GET', url, true);
         xhr.send();
     }
 
     window.onbeforeunload = function (){
-        attacks.forEach(function(attack){
-            stop_attack(attack);
-        });
+        stop_attack()
+    }
+    body.onbeforeunload = function (){
+        stop_attack()
     }
 
     </script>
