@@ -91,7 +91,7 @@ API.add_resource(ownrecource, '/api/v1/get_stats')
 
 @app.context_processor
 def add_imports():
-    return dict(platform=platform, requests=requests)
+    return dict(platform=platform, requests=requests, current_user=current_user)
 
 
 @login_manager.user_loader
