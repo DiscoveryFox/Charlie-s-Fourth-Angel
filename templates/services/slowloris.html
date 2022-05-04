@@ -40,6 +40,7 @@ Running Attacks:
         const port = document.getElementById('port_input').value;
         document.getElementById('ip_input').value = '';
         document.getElementById('port_input').value = '';
+        document.getElementById('port_input').style.border = '1px solid red';
         const url = window.location.href + 'start/' + ip + '/' + port;
         const xhr = new XMLHttpRequest();
         xhr.open('GET', url, true);
@@ -113,9 +114,6 @@ Running Attacks:
     }, 10);
 
     function stop_attack(ip_port_tupel) {
-        const ip = ip_port_tupel[0];
-        const port = ip_port_tupel[1];
-        localStorage.setItem(i, (ip + ':' + port));
         // get base url
         var base_url = window.location.href.split('/');
         base_url = base_url[0] + '//' + base_url[2];
@@ -126,12 +124,9 @@ Running Attacks:
         xhr.send();
     }
 
-    window.onbeforeunload = function (){
-        stop_attack()
-    }
-    body.onbeforeunload = function (){
-        stop_attack()
-    }
+    window.addEventListener('beforeunload', function () {
+        stop_attack();
+    });
 
     </script>
 {% endblock %}
