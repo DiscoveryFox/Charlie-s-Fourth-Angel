@@ -27,6 +27,7 @@ def stop_slowloris(ip, port):
             return flask.redirect('/slowloris/')
     return '1'  # flask.redirect('/slowloris/')
 
+
 def stop_all_slowloris():
     """
     This function stops all slowloris processes.
@@ -35,7 +36,8 @@ def stop_all_slowloris():
     for x in process:
         x['popen'].terminate()
         process.remove(x)
-    return 200
+    return 'stopped all', 200
+
 
 # noinspection PyGlobalUndefined
 def start_slowloris(ip, port):
@@ -87,7 +89,8 @@ def register_endpoints(app: flask.Flask, endpoints: list = None):
                 x['view_function'] = app.route(x['endpoint'], methods=x['method'])(
                     login_required(x['view_function']))
             else:
-                x['view_function'] = app.route(x['endpoint'], methods=x['method'])(x['view_function'])
+                x['view_function'] = app.route(x['endpoint'], methods=x['method'])(
+                    x['view_function'])
     except AssertionError:
         pass
 
@@ -127,7 +130,6 @@ def run_code(*args):
         if len(rule.defaults or {}) >= len(rule.arguments):
             url = flask.url_for(rule.endpoint, **(rule.defaults or {}))
             links.append([rule.endpoint, url])
-
 
     # returning the rendered side
     return flask.render_template('services/slowloris.html', current_user=current_user)
