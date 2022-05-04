@@ -29,22 +29,22 @@
         }
         switch(page) {
             case 'index':
-                var sidebar = "<div class='sidebar' id='sidebar'> <a href='/' class='active id='index'>Tools</a> <a href='/my_machine' id='my_machine'>My Machine</a><a href='/security' id='security'>Security</a><a href='/settings' id='settings'>Settings</a><a href='/account' id='account'>Account</a>";
+                var sidebar = "<div class='sidebar' id='sidebar'> <a href='/' class='active id='index'>Tools</a> <a href='/my_machine' id='my_machine'>My Machine</a><a href='/security' id='security'>Security</a><a href='/settings' id='settings'>Settings</a><a href='/account' id='account'>Account</a><a href='/logout' id='logout'>Logout</a>";
                 break;
             case 'my_machine':
-                var sidebar = "<div class='sidebar' id='sidebar'> <a href='/' id='index'>Tools</a> <a href='/my_machine' class='active id='my_machine'>My Machine</a><a href='/security' id='security'>Security</a><a href='/settings' id='settings'>Settings</a><a href='/account' id='account'>Account</a>";
+                var sidebar = "<div class='sidebar' id='sidebar'> <a href='/' id='index'>Tools</a> <a href='/my_machine' class='active id='my_machine'>My Machine</a><a href='/security' id='security'>Security</a><a href='/settings' id='settings'>Settings</a><a href='/account' id='account'>Account</a><a href='/logout' id='logout'>Logout</a>";
                 break;
             case 'security':
-                var sidebar = "<div class='sidebar' id='sidebar'> <a href='/' id='index'>Tools</a> <a href='/my_machine' id='my_machine'>My Machine</a><a href='/security' class='active id='security'>Security</a><a href='/settings' id='settings'>Settings</a><a href='/account' id='account'>Account</a>";
+                var sidebar = "<div class='sidebar' id='sidebar'> <a href='/' id='index'>Tools</a> <a href='/my_machine' id='my_machine'>My Machine</a><a href='/security' class='active id='security'>Security</a><a href='/settings' id='settings'>Settings</a><a href='/account' id='account'>Account</a><a href='/logout' id='logout'>Logout</a>";
                 break;
             case 'settings':
-                var sidebar = "<div class='sidebar' id='sidebar'> <a href='/' id='index'>Tools</a> <a href='/my_machine' id='my_machine'>My Machine</a><a href='/security' id='security'>Security</a><a href='/settings' class='active id='settings'>Settings</a><a href='/account' id='account'>Account</a>";
+                var sidebar = "<div class='sidebar' id='sidebar'> <a href='/' id='index'>Tools</a> <a href='/my_machine' id='my_machine'>My Machine</a><a href='/security' id='security'>Security</a><a href='/settings' class='active id='settings'>Settings</a><a href='/account' id='account'>Account</a><a href='/logout' id='logout'>Logout</a>";
                 break;
             case 'account':
-                var sidebar = "<div class='sidebar' id='sidebar'> <a href='/' id='index'>Tools</a> <a href='/my_machine' id='my_machine'>My Machine</a><a href='/security' id='security'>Security</a><a href='/settings' id='settings'>Settings</a><a href='/account' class='active id='account'>Account</a>";
+                var sidebar = "<div class='sidebar' id='sidebar'> <a href='/' id='index'>Tools</a> <a href='/my_machine' id='my_machine'>My Machine</a><a href='/security' id='security'>Security</a><a href='/settings' id='settings'>Settings</a><a href='/account' class='active id='account'>Account</a><a href='/logout' id='logout'>Logout</a>";
                 break;
             default:
-                var sidebar = "<div class='sidebar' id='sidebar'> <a href='/' class='active id='index'>Tools</a> <a href='/my_machine' id='my_machine'>My Machine</a><a href='/security' id='security'>Security</a><a href='/settings' id='settings'>Settings</a><a href='/account' id='account'>Account</a>";
+                var sidebar = "<div class='sidebar' id='sidebar'> <a href='/' class='active id='index'>Tools</a> <a href='/my_machine' id='my_machine'>My Machine</a><a href='/security' id='security'>Security</a><a href='/settings' id='settings'>Settings</a><a href='/account' id='account'>Account</a><a href='/logout' id='logout'>Logout</a>";
         }
         body = document.getElementsByTagName('body')[0];
         body.innerHTML = sidebar + body.innerHTML;
