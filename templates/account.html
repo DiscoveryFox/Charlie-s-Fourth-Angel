@@ -20,15 +20,19 @@
                 <td><a href="#edit">Edit</a></td>
                 <td><a href="#delete">Delete</a></td>
             </tr>
-            <div id="{{ services[service]['title'].lower() + "_popup"}}" class="overlay">
+        {% endfor %}
+
+            <div id="{{ current_user.name + "_popup"}}" class="overlay">
                 <div class="popup">
-                    <!-- <h2>{{ services[service]['title'] }}</h2> -->
                     <a class="close" href="#">&times;</a>
                 </div>
                 <div class="account_content">
-
+                    <label for="old_password">Enter old password:</label><input type="text" name="old password" id="old_password" placeholder="Old Password...">
+                    <label for="new_password">Enter new password:</label><input type="text" name="new password" id="new_password" placeholder="New Password...">
+                    <label for="confirm_password">Confirm new password:</label><input type="text" name="confirm password" id="confirm_password" placeholder="Confirm Password...">
+                    <button id="{{ current_user.name + "_submit"}}">Submit</button>
                 </div>
             </div>
-        {% endfor %}
+
     </table>
 {% endblock %}
