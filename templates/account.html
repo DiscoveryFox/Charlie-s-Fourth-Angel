@@ -20,6 +20,15 @@
                 <td><a href="#edit">Edit</a></td>
                 <td><a href="#delete">Delete</a></td>
             </tr>
+            <div id="{{ services[service]['title'].lower() + "_popup"}}" class="overlay">
+                <div class="popup">
+                    <!-- <h2>{{ services[service]['title'] }}</h2> -->
+                    <a class="close" href="#">&times;</a>
+                </div>
+                <div class="account_content">
+
+                </div>
+            </div>
         {% endfor %}
     </table>
 {% endblock %}
