@@ -21,18 +21,16 @@
                 <td><a href="#delete">Delete</a></td>
             </tr>
         {% endfor %}
-
-            <div id="{{ current_user.name + "_popup"}}" class="overlay">
+    </table>
+    <div id="{{ current_user.name + "_popup"}}" class="overlay">
                 <div class="popup">
                     <a class="close" href="#">&times;</a>
                 </div>
                 <div class="account_content">
-                    <label for="old_password">Enter old password:</label><input type="text" name="old password" id="old_password" placeholder="Old Password...">
-                    <label for="new_password">Enter new password:</label><input type="text" name="new password" id="new_password" placeholder="New Password...">
-                    <label for="confirm_password">Confirm new password:</label><input type="text" name="confirm password" id="confirm_password" placeholder="Confirm Password...">
+                    <label for="old_password">Enter old password:</label><br><input type="text" name="old password" id="old_password" placeholder="Old Password..."><br>
+                    <label for="new_password">Enter new password:</label><br><input type="text" name="new password" id="new_password" placeholder="New Password..."><br>
+                    <label for="confirm_password">Confirm new password:</label><br><input type="text" name="confirm password" id="confirm_password" placeholder="Confirm Password..."><br>
                     <button id="{{ current_user.name + "_submit"}}">Submit</button>
                 </div>
             </div>
-
-    </table>
 {% endblock %}
