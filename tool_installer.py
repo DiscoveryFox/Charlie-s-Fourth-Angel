@@ -1,5 +1,6 @@
 import os
 import json
+import time
 import pip
 import configparser
 from pprint import pprint
@@ -59,6 +60,23 @@ def add_blueprint(service_dir: str, name: str) -> str:
     return "blueprint"
 
 
+# todo: add support to get git project name from ssh connection
+
+def git_project_name(link: str) -> str:
+    return link.split('/')[-1].split('.')[0].split('_')[-1]
+
+
+def download(path, binary=False) -> None:
+    if binary:
+        with open(f'{git_project_name(path)}_installer.py', "wb") as file:
+            file.write(requests.get(path).content)
+    else:
+        with open(f'{git_project_name(path)}_installer.py', "w") as file:
+            file.write(requests.get(path).text)
+
+
+# todo: add support for multiple os in the installation file maybe with a check locally or maybe
+#  the installer just recognize it. Also add python path to app.cfg or atleast prefix or smth
 def install(name):
     service = get_service(name)
     match service['success']:
@@ -67,6 +85,14 @@ def install(name):
                 filecontent = json.loads(file.read())
                 if name in filecontent:
                     content = filecontent
+                    pprint(content)
+                    download(content[name]['path_to_installer'])
+                    # check if file is downloaded
+                    while not os.path.isfile(f"{git_project_name(content[name]['path_to_installer'])}_installer.py"):
+                        time.sleep(0.3)
+                        print('waiting for file to be downloaded')
+                    os.system(f'python3.10 {name}_installer.py')
+                    content['installed'] = True
                     del content[name]
                     content_found = True
                 else:
@@ -83,6 +109,7 @@ def install(name):
                     add_blueprint(content[name], name)
                     file.truncate()
                     file.write(json.dumps(content, indent=2))
+
         case 0:
             print('Service not found in this database.')
         case _:
@@ -100,3 +127,6 @@ def check_if_service_installed(project_to_open):
         except KeyError:
             print('Service not found in this database.')
             return False
+
+
+install('slowloris')
