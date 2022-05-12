@@ -32,8 +32,8 @@
     "description": "Slowloris is a DDOS Tool",
     "installed": true,
     "path_on_server": "/slowloris",
+    "path_to_installer": "https://raw.githubusercontent.com/DiscoveryFox/Charlie-s-Fourth-Angel-blueprints/main/install_slowloris.py",
     "path_to_details": "https://raw.githubusercontent.com/DiscoveryFox/Charlie-s-Fourth-Angel/master/slowloris_test.html",
-    "path_to_git": "https://github.com/gkbrk/slowloris",
     "supported_OS": [
       "Windows",
       "Darwin",
@@ -41,7 +41,6 @@
       "Java"
     ],
     "title": "Slowloris",
-    "version": 1.0,
-    "path_to_blueprint": "https://raw.githubusercontent.com/DiscoveryFox/Charlie-s-Fourth-Angel-blueprints/main/slowloris_blueprint.py"
+    "version": 1.0
   }
 }
