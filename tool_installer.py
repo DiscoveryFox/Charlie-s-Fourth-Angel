@@ -85,14 +85,14 @@ def install(name):
                 filecontent = json.loads(file.read())
                 if name in filecontent:
                     content = filecontent
-                    pprint(content)
+                    # pprint(content)
                     download(content[name]['path_to_installer'])
                     # check if file is downloaded
                     while not os.path.isfile(f"{git_project_name(content[name]['path_to_installer'])}_installer.py"):
                         time.sleep(0.3)
                         print('waiting for file to be downloaded')
                     os.system(f'python3.10 {name}_installer.py')
-                    content['installed'] = True
+                    content[name]['installed'] = True
                     del content[name]
                     content_found = True
                 else:
@@ -106,7 +106,7 @@ def install(name):
                     file.writelines(lines)
                 else:
                     content[name] = service['response']
-                    add_blueprint(content[name], name)
+                    # add_blueprint(content[name], name)
                     file.truncate()
                     file.write(json.dumps(content, indent=2))
 
@@ -129,4 +129,3 @@ def check_if_service_installed(project_to_open):
             return False
 
 
-install('slowloris')
